@@ -12,11 +12,14 @@
                 <ul class="navbar-nav mr-auto">
                     
                     <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDropCursos">Cursos</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDropCursos">Curso Presencial</a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cursopresencial">Presencial</a> 
-                                <a class="dropdown-item" href="#">EAD</a>     
+                                <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_aberto">Abertos</a> 
+                                <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_andamento">Em andamento</a>     
+                                <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_encerrado">Encerrados</a>
+                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_adicionar">Adicionar curso</a>     
                             </div>
 
                       </li>

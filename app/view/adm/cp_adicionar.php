@@ -4,7 +4,7 @@
     
         <div class="col-12 text-center mt-5">
         
-            <h1 class="display-4"><i class="far fa-edit text-primary"></i> Editar Curso Presencial</h1> 
+            <h1 class="display-4"><i class="fa fa-plus text-primary"></i> Adicionar Curso Presencial</h1> 
             <p class="mt-4">Os campos que tiverem * são de preenchimento obrigatório.</p>
             <hr>
         </div>
@@ -66,7 +66,30 @@
 
                                 </div>
                                 
-                                <div class="form-row">
+                                <div class="ml-2">
+                                     <label>Prova</label>
+
+                                    <div class="form-row">
+                                        <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optradio">Sim
+                                              </label>
+                                            </div>
+
+
+                                    </div>
+
+                                    <div class="form-row">
+
+                                         <div class="form-check">
+                                              <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="optradio">Não
+                                              </label>
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row mt-3">
 
                                     <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
 
@@ -81,7 +104,7 @@
                 
                                     <div class="form-group ">
 
-                                        <button type="submit" class="btn btn-success">Editar</button>
+                                        <button type="submit" class="btn btn-success">Adicionar</button>
 
                                     </div>
 
@@ -157,60 +180,29 @@
                 
                    <div class="row justify-content-center">
                     
-                        <div class="col-sm-12 col-md-10 col-lg-8">
-                       
-                       
-                            <form>
-                            
-                            
-                                <div class="form-row">
+                      <div class="form-group">
 
-                                    <div class="form-group col-md-6 col-sm-12 col-12 col-lg-6">
+                           <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
-                                      <label class="" for="inputCpf">CPF</label>
-                                      <input type="text" class="form-control" id="inputCpf" placeholder="123.456.789-0" required>
 
-                                    </div>
+                              <label class="btn btn-success active">
+                                <input type="radio" name="nservidor" value="servidor" id="servidor" autocomplete="off"> Servidores
+                              </label>
 
-                                </div>
-                                
-                                <div class="form-row">
+                              <label class="btn btn-success">
+                                <input type="radio" name="servidor" value="externo" id="externo" autocomplete="off"> Externos
+                              </label>
 
-                                    <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
-
-                                      <label class="" for="txt_instrutor">Nome</label>
-                                      <input type="text" class="form-control" id="txt_instrutor" placeholder="" required>
-
-                                    </div>
-
-                                </div>
-                                
-                                
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
-
-                                      <label class="control-label">Descrição</label>
-                                      <textarea class="form-control" name="txt_descricao" rows="6" maxlength="300" placeholder="Coloque uma breve descrição do instrutor. Máximo 300 carecteres."></textarea>
-
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-row">
-                
-                                    <div class="form-group ">
-
-                                        <button type="submit" class="btn btn-success">Adicionar</button>
-
-                                    </div>
-
-                                </div>
-                            
-                            </form>
-                       
+                            </div>
+                    
                        </div>
                     
+                    </div>
+                    
+                    <div class="col-lg-12">
+    
+                        <div id="instrutor"></div>
+
                     </div>
                     
                 </div>
@@ -234,5 +226,28 @@ $(document).ready(function(){
       $('#inputCpf').mask('000.000.000-00');
       
     });
+    
+    //    O bloco de comando abaixo irá exibir ou não o campo de matrícula, de acordo com o que for selecionado pelo usuário
+    
+      $("input[type=radio]").on("change", function() {
+        
+          var opcao = $(this).val();
+            
+            if (opcao == "servidor") {
+                    
+                      $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
+
+            } else if (opcao == "externo") {
+
+                      $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorexterno");
+
+            }
+          });
+    
+     $(document).ready(function(){
+        
+        $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
+    });
+
 
 </script>

@@ -1,38 +1,13 @@
 <div class="container">
-
-     <div class="row justify-content-center mt-5">
-                
-                    <div class="form-group">
-
-                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                           
-                           
-                          <label class="btn btn-success active">
-                            <input type="radio" name="cursos" value="servidor" id="nservidor" autocomplete="off">Abertos
-                          </label>
-                           
-                          <label class="btn btn-success">
-                            <input type="radio" name="cursos" value="municipe" id="servidor" autocomplete="off">Em andamento
-                          </label>
-                           
-                           <label class="btn btn-success">
-                            <input type="radio" name="cursos" value="municipe" id="servidor" autocomplete="off">Encerrados
-                          </label>
-                           
-                        </div>
-                    
-                    </div>
-                
-    </div>
     
-    <div class="row">
+     <div class="row">
+    
+        <div class="col-12 text-center mt-5">
         
-        <div class="mt-3 ml-3">
-        
-             <a type="button" class="btn btn-success" href="#" data-toggle="modal" data-target="#modalCadastro">Adicionar Curso</a>
-        
+            <h1 class="display-5">Cursos Abertos</h1> 
+            <hr>
         </div>
-    
+         
     </div>
     
     <div class="row mt-3">
@@ -62,8 +37,8 @@
                 </ul>
                
                 <div class="card-body">
-                    <a type="button" href="<?=BASE_URL?>Adm/pagina/editarcursopresencial" class="btn btn-success">Editar</a>
-                    <a type="button" href="<?=BASE_URL?>Adm/pagina/infocursopresencial" class="btn btn-primary">Info</a>
+                    <a type="button" href="<?=BASE_URL?>Adm/pagina/cp_editar" class="btn btn-success">Editar</a>
+                    <a type="button" href="<?=BASE_URL?>Adm/pagina/cp_info" class="btn btn-primary">Info</a>
                 </div>
                 
                 

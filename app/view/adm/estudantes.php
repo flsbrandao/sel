@@ -22,7 +22,7 @@
                           </label>
                            
                           <label class="btn btn-success">
-                            <input type="radio" name="servidor" value="municipe" id="servidor" autocomplete="off"> Munícipe
+                            <input type="radio" name="servidor" value="municipe" id="servidor" autocomplete="off"> Munícipes
                           </label>
                            
                         </div>

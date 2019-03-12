@@ -46,7 +46,7 @@ Class App{
 				Caso não tenha, ele fica com o valor padrão [] (vazio)
 			*/ 
 			$this->param = $url ? array_values($url) : [];
-
+            
 			// Chama o objeto da classe, o método e passa o parâmetro
 			call_user_func_array([$this->controller, $this->method], $this->param);
 
