@@ -65,6 +65,6 @@ Class App{
 /*
 rtrim - tira todos os espaços encontrados na url
 filter_var - elimina todos os carecteres proibidos para url
-explode - explode a url usando / como delimitador 
+explode - explode a url usando '/' como delimitador 
 
 */

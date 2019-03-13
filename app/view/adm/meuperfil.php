@@ -17,7 +17,7 @@
     
         <div class="col-12 text-center mt-3">
         
-            <h1 class="display-4"><i class="fas fa-cogs text-primary"></i> Configurações</h1> 
+            <h1 class="display-4"><i class="fas fa-user-edit text-primary"></i> Meu perfil</h1> 
             <p class="mt-4">Os campos que tiverem * são de preenchimento obrigatório.</p>
         </div>
     </div>

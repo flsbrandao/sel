@@ -8,6 +8,7 @@ Class Adm extends Controller{
 
     //Carrega as páginas
 	public function pagina($pagina){
+        
 		parent::header();
 		self::menu();
 		require_once("app/view/adm/" . $pagina .".php");

@@ -49,7 +49,7 @@
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">Olá Severino</a>
                         
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/configuracoes">Configurações</a> 
+                            <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/meuperfil">Meu perfil</a> 
                              <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Sair</a>     
      
