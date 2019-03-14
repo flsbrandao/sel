@@ -19,7 +19,9 @@ Class Controller {
             
         }else{
             
+            self::header();
             require_once ("app/view/404.php");
+            self::footer();
             return false;
         }
     } // validador()
