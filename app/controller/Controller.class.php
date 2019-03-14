@@ -10,4 +10,17 @@ Class Controller {
 
 		require_once ("app/view/includes/footer.php");
 	}
+    //O método abaixo irá validar se a página requisitada existe
+    protected function validador($arquivo){
+        
+        if(file_exists($arquivo)){
+            
+            return true;
+            
+        }else{
+            
+            require_once ("app/view/404.php");
+            return false;
+        }
+    } // validador()
 }
