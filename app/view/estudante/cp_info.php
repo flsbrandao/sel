@@ -24,8 +24,9 @@
 
 
             <p><b>Instrutores:</b> Jair Bolsonaro, Fernado Haddad</p>
-            <p><b>Total de Inscritos: </b>3</p>
-
+            
+            <p><b>Presença:</b> - </p>
+            <p><b>Prova final:</b> - </p>
 
         </div>
 
@@ -35,47 +36,7 @@
 
     <div class=" row justify-content-center">
 
-        <h4>Inscritos</h4>
-
-    </div>
-
-
-    <div class="row justify-content-center mt-3">
-
-
-        <div class="col-lg-12">
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Tipo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-
-                        <td>Jair Bolsonaro</td>
-                        <td>Munícipe</td>
-                    </tr>
-                    <tr>
-                        <td>Fernando Haddad</td>
-                        <td>Servidor</td>
-
-                    </tr>
-
-                    <tr>
-                        <td>Renan Carneiros</td>
-                        <td>Servidor</td>
-
-                    </tr>
-
-                </tbody>
-            </table>
-
-
-        </div>
-
+        <h4>Material</h4>
 
     </div>
 

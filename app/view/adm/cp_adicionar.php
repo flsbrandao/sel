@@ -65,6 +65,17 @@
                     </div>
 
                 </div>
+                
+                 <div class="form-row">
+                
+                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-4">
+
+                        <label class="" for="aulas">Quantidade de Aulas</label>
+                        <input type="number" class="form-control" id="aulas" required>
+
+                    </div>
+                
+                </div>
 
                 <div class="ml-2">
                     <label>Prova</label>

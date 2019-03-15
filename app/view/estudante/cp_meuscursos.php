@@ -4,13 +4,13 @@
 
         <div class="col-12 text-center mt-5">
 
-            <h1 class="display-4"><i class="fas fa-chalkboard-teacher text-primary"></i> Instrutores</h1>
+            <h1 class="display-5">Meus Cursos</h1>
             <hr>
         </div>
 
     </div>
 
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center">
 
         <div class="form-group">
 
@@ -18,23 +18,22 @@
 
 
                 <label class="btn btn-success active">
-                    <input type="radio" name="nservidor" value="servidor" autocomplete="off"> Servidores
+                    <input type="radio" name="nservidor" value="andamento" autocomplete="off"> Cursos em Andamento
                 </label>
 
                 <label class="btn btn-success">
-                    <input type="radio" name="servidor" value="externos" autocomplete="off"> Externos
+                    <input type="radio" name="servidor" value="encerrados" autocomplete="off"> Encerrados
                 </label>
 
             </div>
 
         </div>
-
-        <div class="col-lg-12">
-            <div id="instrutores"></div>
-        </div>
-
-
     </div>
+
+    <div class="col-lg-12">
+        <div id="cursos"></div>
+    </div>
+
 </div> <!-- container -->
 
 <script>
@@ -44,20 +43,20 @@
 
         var opcao = $(this).val();
 
-        if (opcao == "servidor") {
+        if (opcao == "andamento") {
 
-            $('#instrutores').load("<?=BASE_URL?>Adm/table/instrutorservidor");
+            $('#cursos').load("<?=BASE_URL?>Estudante/table/table_cursoandamento");
 
-        } else if (opcao == "externos") {
+        } else if (opcao == "encerrados") {
 
-            $('#instrutores').load("<?=BASE_URL?>Adm/table/instrutorexterno");
+            $('#cursos').load("<?=BASE_URL?>Estudante/table/table_cursoencerrado");
 
         }
     });
 
     $(document).ready(function() {
 
-        $('#instrutores').load("<?=BASE_URL?>Adm/table/instrutorservidor");
+        $('#cursos').load("<?=BASE_URL?>Estudante/table/table_cursoandamento");
     });
 
 </script>
