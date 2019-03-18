@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 
     <div class="container">
 
@@ -33,13 +33,11 @@
                     <a class="nav-link" href="<?=BASE_URL?>Adm/pagina/estudantes">Estudantes</a>
                 </li>
 
+<!--
                 <li class="nav-item">
                     <a class="nav-link" href="#">Certificados</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Material</a>
-                </li>
+-->
 
             </ul>
 

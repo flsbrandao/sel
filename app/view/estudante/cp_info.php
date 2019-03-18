@@ -24,7 +24,7 @@
 
 
             <p><b>Instrutores:</b> Jair Bolsonaro, Fernado Haddad</p>
-            
+
             <p><b>Presença:</b> - </p>
             <p><b>Prova final:</b> - </p>
 
@@ -34,10 +34,44 @@
 
     <hr>
 
-    <div class=" row justify-content-center">
+    <div class="row">
 
-        <h4>Material</h4>
+        <div class="col-12 text-center mt-5">
 
+            <h1 class="display-4"><i class="fas fa-file text-primary"></i> Material</h1>
+
+            <hr>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+       
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Arquivo</th>
+                        <th scope="col">Baixar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>Alfabeto em inglês</td>
+                        <td><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-file-download"></i></button></td>
+                    </tr>
+                    <tr>
+
+                        <td>Comida</td>
+                        <td><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-file-download"></i></button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+        
     </div>
 
 </div>

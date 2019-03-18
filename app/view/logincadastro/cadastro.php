@@ -156,16 +156,10 @@
                      <div class="form-group col-lg-5 col-md-5 col-sm-5 col-9">
 
                         <label for="inputUsuario">Usuário *</label>
-                        <input type="text" class="form-control" id="inputUsuario" placeholder="" required>
+                        <input type="text" class="form-control" id="inputUsuario" placeholder="" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse usuário. Não coloque carecteres especiais e nem espaço.">
                     
                     </div>
                     
-                     <div class="form-group botao-ajuda col-3">
-                             
-                        <a tabindex="0" class="btn btn-secondary" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse usuário. Não coloque carecteres especiais e nem espaço.">Atenção</a>
-                         
-                    </div>
-                
                 </div>
                 
                 <div class="form-row">
