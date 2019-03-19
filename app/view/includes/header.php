@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<?=BASE_URL?>app/view/assets/css/style.css">
 
     <script src="<?=BASE_URL?>app/view/assets/js/jquery/jquery.js"></script>
+    <script src="<?=BASE_URL?>app/view/assets/js/sweet/sweetalert.js"></script>
+
 
     <title>SEL</title>
   </head>
