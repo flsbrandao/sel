@@ -18,5 +18,33 @@ Class M_Endereco extends Model{
 
 			echo 'ERRO: ' . $e->getMessage();
 		} 
+	}// cadastro()
+
+	public function validar_cep($cep){
+
+		try{
+			$sql = "SELECT * FROM tb_endereco WHERE cep = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $cep);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+
+			if($rows === 1){
+
+				$retorno = true;
+
+			}else{
+
+				$retorno = false;
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+		}
+
 	}
 }//Class

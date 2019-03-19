@@ -1,7 +1,7 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
-  
+   
       $('#inputCpf').mask('000.000.000-00');
       $('#inputCelular').mask('(00) 00000-0000');
       $('#inputTelefone').mask('(00) 0000-0000');
@@ -212,8 +212,8 @@
                 
                      <div class="form-group col-lg-5 col-md-5 col-sm-5 col-9">
 
-                        <label for="inputUsuario">Usuário *</label>
-                        <input type="text" class="form-control" id="inputUsuario" name="inputUsuario" placeholder="" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse usuário. Não coloque carecteres especiais e nem espaço.">
+                        <label for="inputUsuario">Login *</label>
+                        <input type="text" class="form-control" id="inputLogin" name="inputLogin" placeholder="" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse login. Não coloque carecteres especiais e nem espaço.">
                     
                     </div>
                     
@@ -314,33 +314,86 @@
       $(document).ready(function(){
 
         $("#formCadastro").submit(function(event){
-            $.ajax({
-                type:"POST",
-                url: '<?=BASE_URL?>Login/cadastrar_usuario',
-                data: $("#formCadastro").serialize(),
-                success: function (data){
-                    // alert($.trim(data));
-                    if($.trim(data) == '1'){
 
-                        $('#formCadastro').trigger("reset");
+            if ($("#inputSenha").val() !== $("#inputRSenha").val()){
 
-                         swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 2000, button: false});
+                 swal( "Atenção!", "As senhas digitadas não conferem!", "warning");
+                         $("#inputSenha").val("");
+                         $("#inputRSenha").val("");
 
-                    }else{
-                        swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
+            }else{
+
+                $.ajax({
+                    type:"POST",
+                    url: '<?=BASE_URL?>Login/cadastrar_usuario',
+                    data: $("#formCadastro").serialize(),
+                    success: function (data){
+                        // alert($.trim(data));
+                        if($.trim(data) == '1'){
+
+                            $('#formCadastro').trigger("reset");
+
+                             swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 2000, button: false});
+
+                        }else{
+                            swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
+                        }
+                    },beforeSend: function (){
+
+                        swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
+                    },
+                    error: function(){
+                        alert('Unexpected error.');
                     }
-                },beforeSend: function (){
 
-                    swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/assets/img/gif/preloader.gif", button: false});
-                },
-                error: function(){
-                    alert('Unexpected error.');
-                }
+                }); // Ajax
 
-            });
+            }
 
             return false;
-        }); //submit
+        }); //Cadastrar Dados
+
+
+        $("#inputCpf").blur(function(){
+            
+            $.ajax({
+                type:"POST",
+                url: "<?=BASE_URL?>Login/validar_cpf",
+                data: {'cpf': $("#inputCpf").val()},
+
+                success: function(data){
+
+                    if(data == true){
+                         swal( "Atenção!", "CPF já cadastrado no sistema!", "warning");
+                         $("#inputCpf").val("");
+                    }
+
+                },error: function(){
+                    alert('Unexpected ERROR.')
+                }
+            });
+        });//Validar CPF
+
+        $("#inputLogin").blur(function(){
+
+            $.ajax({
+                type:"POST",
+                url: "<?=BASE_URL?>Login/validar_login",
+                data: {'login': $("#inputLogin").val()},
+
+                success: function(data){
+
+                    if(data == true){
+                         swal( "Atenção!", "Login já cadastrado no sistema!", "warning");
+                         $("#inputLogin").val("");
+                    }
+
+                },error: function(){
+                    alert('Unexpected ERROR.')
+                }
+            });
+
+        });//Valida usuário
 
       }); //document
 </script>

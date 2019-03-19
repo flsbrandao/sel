@@ -23,5 +23,32 @@ Class M_Usuario extends Model{
 
 			echo 'ERRO: ' . $e->getMessage();
 		} 
+	} // cadastro
+
+	public function validar_cpf($cpf){
+
+		try{
+			$sql = "SELECT * FROM tb_usuario WHERE cpf = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $cpf);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+
+			if($rows === 1){
+
+				$retorno = true;
+
+			}else{
+
+				$retorno = false;
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+		}
 	}
 }
