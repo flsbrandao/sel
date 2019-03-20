@@ -39,9 +39,9 @@ Class Login extends Controller{
 		$categoria = $_POST['categoria'];
 		$matricula = $_POST['inputMatricula'];
 
-		$objUsuario = new M_Usuario(Conexao::getInstance());
-		$objLogin = new M_Login(Conexao::getInstance());
-
+		/*O bloco de comando abaixo verifica se o CEP informado já está cadastrado na base.
+			Caso não esteja, ele será cadastrado 
+		*/
 		$validar_cep = self::validar_cep($cep);
 
 		if($validar_cep == false){
@@ -49,11 +49,25 @@ Class Login extends Controller{
 			$objEndereco->cadastro($cep,$endereco,$bairro,$municipio,$uf);
 		}
 		
+		$objUsuario = new M_Usuario(Conexao::getInstance());
+		$objLogin = new M_Login(Conexao::getInstance());
 		
-		$objUsuario->cadastro($cpf,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula);
-		$objLogin->cadastro($cpf,$login,$senha);
+		//Criptografa a senha
+		$salt = 'wilhelmklaus2019'.$senha.'sherlokholmes';
+        $hasha = hash('sha512', $salt);
+
+		$retorno1 = $objUsuario->cadastro($cpf,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula);
+		$retorno2 = $objLogin->cadastro($cpf,$login,$hasha);
 		
-		echo "1";
+		$retorno = '0';
+
+		if($retorno1 && $retorno2){
+
+			$retorno = '1';
+		}
+
+		echo $retorno;
+		
 	}
 
 	//O método abaixo irá validar se o CPF informado pelo usuário não está cadastrado no banco
@@ -85,5 +99,16 @@ Class Login extends Controller{
 
 		return $retorno;
 	}
+
+	public function validar_email(){
+
+		$email = $_POST['email'];
+
+		$objUsuario = new M_Usuario(Conexao::getInstance());
+		$retorno = $objUsuario->validar_email($email);
+
+		echo $retorno;
+	}
+
 
 }//Class

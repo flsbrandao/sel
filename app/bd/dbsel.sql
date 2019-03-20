@@ -15,10 +15,11 @@ CREATE TABLE tb_endereco(
 )default charset = utf8 ;
 
 CREATE TABLE tb_usuario(
+	id int unique auto_increment,
 	cpf varchar(14) not null primary key,
     nome varchar(60) not null,
     data_nasc date not null,
-    email varchar(30) not null,
+    email varchar(30) not null unique,
     celular varchar(14) not null,
     telefone varchar(13) not null,
     cep varchar(10),
@@ -31,8 +32,8 @@ CREATE TABLE tb_usuario(
 
 create table tb_login(
 	cpf varchar(14),
-    login varchar(10) not null primary key,
-    senha varchar(30) not null,
+    login varchar(15) not null primary key,
+    senha varchar(255) not null,
 	tipo varchar(3) default 'est',
     foreign key (cpf) references tb_usuario(cpf)
 )default charset = utf8;

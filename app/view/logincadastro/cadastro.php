@@ -11,6 +11,7 @@
 
       function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
+                $("#inputCep").val("");
                 $("#inputEndereco").val("");
                 $("#inputBairro").val("");
                 $("#inputMunic").val("");
@@ -30,16 +31,13 @@
                 //Valida o formato do CEP.
                 if(validacep.test(cep)) {
 
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    $("#inputEndereco").val("...");
-                    $("#inputBairro").val("...");
-                    $("#inputMunic").val("...");
-                    $("#inputUf").val("...");
+                    swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
 
                  //Consulta o webservice viacep.com.br/
                     $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
                         if (!("erro" in dados)) {
+                            swal.close();
                             //Atualiza os campos com os valores da consulta.
                             $("#inputEndereco").val(dados.logradouro);
                             $("#inputBairro").val(dados.bairro);
@@ -51,13 +49,13 @@
                         else {
                             //CEP pesquisado não foi encontrado.
                             limpa_formulário_cep();
-                            alert("CEP não encontrado.");
+                            swal( "Atenção!", "CEP não encontrado.", "warning", { timer: 3000, button: false});
                         }
                     });
                 }else{
                      //cep é inválido.
                       limpa_formulário_cep();
-                      alert("Formato de CEP inválido.");
+                     swal( "Atenção!", "Formato de CEP inválido .", "error", { timer: 3000, button: false});
                 }
 
             }else{
@@ -123,7 +121,7 @@
                      <div class="form-group col-lg-7 col-md-10 col-sm-10 col-12">
 
                         <label for="inputEmail">Email *</label>
-                        <input type="email" class="form-control" name="inputEmail" placeholder="meuemail@email.com" required>
+                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="meuemail@email.com" required>
 
                     </div>
                 
@@ -213,7 +211,7 @@
                      <div class="form-group col-lg-5 col-md-5 col-sm-5 col-9">
 
                         <label for="inputUsuario">Login *</label>
-                        <input type="text" class="form-control" id="inputLogin" name="inputLogin" placeholder="" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse login. Não coloque carecteres especiais e nem espaço.">
+                        <input type="text" class="form-control" id="inputLogin" name="inputLogin" maxlength="15" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Você terá acesso ao sistema com esse login. Não coloque carecteres especiais e nem espaço. Máximo 15 carecteres.">
                     
                     </div>
                     
@@ -264,7 +262,7 @@
                     <div class="form-group col-lg-6 col-md-10 col-sm-10 col-12">
 
                         <label for="inputMatricula">Matrícula *</label>
-                        <input type="password" class="form-control" id="inputMatricula" name="inputMatricula">
+                        <input type="text" class="form-control" id="inputMatricula" name="inputMatricula" maxlength="10">
                     
                     </div>
                 
@@ -333,7 +331,9 @@
 
                             $('#formCadastro').trigger("reset");
 
-                             swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 2000, button: false});
+                             swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 3000, button: false});
+                             //Depois de 3,5 segundos, o usuário será redirecionado
+                             setTimeout(function(){ window.location.href = '<?=BASE_URL?>Login/index'; }, 3200); 
 
                         }else{
                             swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
@@ -394,6 +394,35 @@
             });
 
         });//Valida usuário
+
+         $("#inputEmail").blur(function(){
+
+            $.ajax({
+                type:"POST",
+                url: "<?=BASE_URL?>Login/validar_email",
+                data: {'email': $("#inputEmail").val()},
+
+                success: function(data){
+
+                    if(data == true){
+                         swal( "Atenção!", "Esse email já possui um cadastrado.", "warning");
+                         $("#inputEmail").val("");
+                    }
+
+                },error: function(){
+                    alert('Unexpected ERROR.')
+                }
+            });
+
+        });//Valida email
+
+         $(function(){
+              var regex = new RegExp('[^0-9a-zA-Zàèìòùáéíóúâêîôûãõ\b]', 'g');
+              // repare a flag "g" de global, para substituir todas as ocorrências
+              $('#inputLogin').bind('input', function(){
+                $(this).val($(this).val().replace(regex, ''));
+              });
+            })
 
       }); //document
 </script>

@@ -12,9 +12,13 @@ Class M_Login extends Model{
 			$stm->bindValue(3, $senha);
 			$stm->execute();
 
+			return true;
+
 		}catch(PDOException $e){
 
 			echo 'ERRO: ' . $e->getMessage();
+
+			return false;
 		}
 	}
 

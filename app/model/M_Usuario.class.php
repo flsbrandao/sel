@@ -19,9 +19,13 @@ Class M_Usuario extends Model{
 			$stm->bindValue(10, $matricula);
 			$stm->execute();
 
+			return true;
+
 		}catch (PDOException $e){
 
 			echo 'ERRO: ' . $e->getMessage();
+			
+			return false;
 		} 
 	} // cadastro
 
@@ -50,5 +54,32 @@ Class M_Usuario extends Model{
 
 			 echo 'Erro: ' . $e->getMessage();
 		}
-	}
+	}// Valida CPF
+
+	public function validar_email($email){
+
+		try{
+			$sql = "SELECT * FROM tb_usuario WHERE email = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $email);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+
+			if($rows === 1){
+
+				$retorno = true;
+
+			}else{
+
+				$retorno = false;
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+		}
+	}// Valida CPF
 }

@@ -51,7 +51,7 @@
                     
                 </div>
                     
-                  <div class="card-footer text-center"><a href="Login/cadastro">Ainda não tem cadastro? Cadastre-se aqui</a></div>
+                  <div class="card-footer text-center"><a href="<?=BASE_URL?>Login/cadastro">Ainda não tem cadastro? Cadastre-se aqui</a></div>
 
               </div>
                 
