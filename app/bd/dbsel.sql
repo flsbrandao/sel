@@ -37,3 +37,16 @@ create table tb_login(
 	tipo varchar(3) default 'est',
     foreign key (cpf) references tb_usuario(cpf)
 )default charset = utf8;
+
+create table tb_curso(
+	codigo int auto_increment primary key,
+    nome varchar(50) not null,
+    inicio date not null,
+    fim date not null,
+    horario varchar(5) not null,
+    total_horas varchar(6) not null,
+    quant_aulas int not null,
+    categoria enum ('S','A') not null,
+    limite_inscritos int,
+    descricao text(500)
+);

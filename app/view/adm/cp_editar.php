@@ -68,6 +68,70 @@
 
                 <div class="form-row">
 
+                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-4">
+
+                        <label class="" for="aulas">Quantidade de Aulas</label>
+                        <input type="number" class="form-control" id="aulas" name="inputQuantidade" required>
+
+                    </div>
+
+                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-4">
+
+                        <label class="" for="aulas">Limitar Inscritos</label>
+                        <input type="number" class="form-control" id="aulas" name="inputLimitacao" required>
+
+                    </div>
+
+                </div>
+
+                <div class="ml-2">
+                    <label>Prova:</label>
+
+                    <div class="form-row">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="prova" value="S">Sim
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="prova" value="N">Não
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label>O curso será:</label>
+
+                    <div class="form-row ml-1">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="radio_curso" value="S">Somente para servidores
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row ml-1">
+
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="radio_curso" value="A">Aberto ao público
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row mt-3">
+
                     <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
 
                         <label class="control-label">Descrição</label>

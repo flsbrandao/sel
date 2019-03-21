@@ -8,16 +8,24 @@ Class Adm extends Controller{
 
     //Carrega as páginas
 	public function pagina($pagina){
+
+        //Verifica se o usuário está logado e se a pagina corresponde ao seu tipo de usuario
+        if(parent::verifica_login() && parent::valida_usuario('adm')){
         
-        $arquivo = "app/view/adm/" . $pagina .".php";
-        
-        if(parent::validador($arquivo)){
+            $arquivo = "app/view/adm/" . $pagina .".php";
             
-            parent::header();
-            self::menu();
-            require_once($arquivo);
-            parent::footer();
-        }
+            if(parent::validador($arquivo)){
+                
+                parent::header();
+                self::menu();
+                require_once($arquivo);
+                parent::footer();
+            }
+        }else{
+
+            $login = new Login();
+            $login->index();
+        } 
 	}//pagina()
     
     //Carrega apenas a tabela na pg de estudantes

@@ -323,17 +323,17 @@
 
                 $.ajax({
                     type:"POST",
-                    url: '<?=BASE_URL?>Login/cadastrar_usuario',
+                    url: '<?=BASE_URL?>Cadastro/cadastrar_usuario',
                     data: $("#formCadastro").serialize(),
                     success: function (data){
-                        // alert($.trim(data));
+                        
                         if($.trim(data) == '1'){
 
                             $('#formCadastro').trigger("reset");
 
                              swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 3000, button: false});
                              //Depois de 3,5 segundos, o usuário será redirecionado
-                             setTimeout(function(){ window.location.href = '<?=BASE_URL?>Login/index'; }, 3200); 
+                             setTimeout(function(){ window.location.href = '<?=BASE_URL?>Login/index'; }, 3100); 
 
                         }else{
                             swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
@@ -358,7 +358,7 @@
             
             $.ajax({
                 type:"POST",
-                url: "<?=BASE_URL?>Login/validar_cpf",
+                url: "<?=BASE_URL?>Cadastro/validar_cpf",
                 data: {'cpf': $("#inputCpf").val()},
 
                 success: function(data){
@@ -378,7 +378,7 @@
 
             $.ajax({
                 type:"POST",
-                url: "<?=BASE_URL?>Login/validar_login",
+                url: "<?=BASE_URL?>Cadastro/validar_login",
                 data: {'login': $("#inputLogin").val()},
 
                 success: function(data){
@@ -399,7 +399,7 @@
 
             $.ajax({
                 type:"POST",
-                url: "<?=BASE_URL?>Login/validar_email",
+                url: "<?=BASE_URL?>Cadastro/validar_email",
                 data: {'email': $("#inputEmail").val()},
 
                 success: function(data){

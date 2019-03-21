@@ -35,12 +35,12 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">Olá Severino</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">Olá <?php echo $_SESSION['nome']?></a>
 
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<?=BASE_URL?>Estudante/pagina/meuperfil">Meu perfil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sair</a>
+                        <a class="dropdown-item" href="<?=BASE_URL?>Login/logout">Sair</a>
 
                     </div>
 

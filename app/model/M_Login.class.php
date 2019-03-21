@@ -20,7 +20,73 @@ Class M_Login extends Model{
 
 			return false;
 		}
-	}
+	}// cadastro()
+
+	public function logar($login, $senha){
+
+		try{
+			$sql = "SELECT tb_login.cpf,tipo, nome FROM tb_login INNER JOIN tb_usuario ON (tb_login.cpf = tb_usuario.cpf) WHERE login = ? AND senha = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $login);
+			$stm->bindValue(2, $senha);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+			
+			//Se foi retornado apenas uma linha do banco, significa que o usuário e senha são válidos
+			if($rows === 1){
+
+				$_SESSION['id'] = session_id();
+
+				$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+				foreach($dados as $registro){
+
+					$tipo = $registro->tipo;
+
+					$_SESSION['cpf'] = $registro->cpf;
+					$_SESSION['tipo'] = $registro->tipo;
+
+					//Pega o primeiro nome do usuário
+					$nome = explode(" ", $registro->nome);
+					$_SESSION['nome'] = $nome[0];
+
+				}
+
+				if($tipo === 'adm'){
+					//Caso o usuário for ADM
+					$usuario = "A";
+
+				}else if($tipo === 'ins'){
+					//Caso o usuário for Instrutor
+					$usuario = "I";
+
+				}else{
+					//Se não for nenhuma das opções anteriores, só pode ser Estudante
+					$usuario = "E";
+				}
+
+				return $usuario;
+
+			}else{
+				session_unset(); //Limpa todas as váriaveis de sessão
+				session_destroy(); //Destroi todas as variáveis de sessão criadas;
+
+				return false;
+			}
+
+		}catch(PDOException $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+		}
+	}//logar()
+
+	public function logout(){
+
+		session_unset();
+		session_destroy();
+
+	}//logout();
 
 	public function validar_login($login){
 
@@ -47,5 +113,5 @@ Class M_Login extends Model{
 
 			 echo 'Erro: ' . $e->getMessage();
 		}
-	}
+	} // validar login
 }//Class

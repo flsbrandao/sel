@@ -7,15 +7,22 @@ Class Instrutor extends Controller{
     
     public function pagina($pagina){
         
-        $arquivo = "app/view/instrutor/" . $pagina .".php";
-        
-        if(parent::validador($arquivo)){
+        //Verifica se o usuário está logado e se a pagina corresponde ao seu tipo de usuario
+        if(parent::verifica_login() && parent::valida_usuario('ins')){
+            $arquivo = "app/view/instrutor/" . $pagina .".php";
             
-            parent::header();
-            self::menu();
-            require_once($arquivo);
-            parent::footer();
-        }
+            if(parent::validador($arquivo)){
+                
+                parent::header();
+                self::menu();
+                require_once($arquivo);
+                parent::footer();
+            }
+        }else{
+
+            $login = new Login();
+            $login->index();
+        } 
     } //pagina()
     
     public function table($table){
