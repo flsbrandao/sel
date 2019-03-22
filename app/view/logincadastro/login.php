@@ -6,14 +6,8 @@
 
             <div class="card">
 
-               <!--  <div class="card-header text-center">
-                    <h2 class="card-title">SEL</h2>
-                    <p>Sistema da Escola Legislativa</p>
-                </div>
- -->
-                <img class="card-img-top" src="<?=BASE_URL?>app/view/assets/img/logo.png" alt="SEL">
                 <div class="card-body">
-
+                    <img class="card-img-top" src="<?=BASE_URL?>app/view/assets/img/icons/logo300.png" alt="SEL">
                     <form id="formLogar">
 
                         <div class="col-auto">
@@ -57,7 +51,17 @@
         </div>
 
     </div>
-</div>
+     <div class="col-12 mt-5">
+            
+                <blockquote class="blockquote text-center">
+
+                   <a href="https://www.linkedin.com/in/brandaofelipe/" target="_blank"> <footer class="blockquote-footer">Desenvolvido por: <cite title="
+                        Titulo">Felipe Brandão</cite></footer></a>
+                
+                </blockquote>
+            
+            </div>
+</div><!--container-->
 <script type="text/javascript">
    $(document).ready(function() {
 

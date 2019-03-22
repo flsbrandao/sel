@@ -1,7 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-
     <div class="container">
-
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
             <span class="navbar-toggler-icon"></span>
@@ -21,14 +19,11 @@
 
                 </li>
 
-
-
 <!--
                 <li class="nav-item">
                     <a class="nav-link" href="#">Certificados</a>
                 </li>
 -->
-
 
             </ul>
 

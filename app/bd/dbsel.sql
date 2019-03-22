@@ -50,3 +50,9 @@ create table tb_curso(
     limite_inscritos int,
     descricao text(500)
 );
+
+create table tb_dias(
+	codigo_curso int,
+    dias varchar(3) not null,
+    foreign key (codigo_curso) references tb_curso (codigo)
+);

@@ -332,7 +332,7 @@
                             $('#formCadastro').trigger("reset");
 
                              swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 3000, button: false});
-                             //Depois de 3,5 segundos, o usuário será redirecionado
+                             //Depois de 3,1 segundos, o usuário será redirecionado
                              setTimeout(function(){ window.location.href = '<?=BASE_URL?>Login/index'; }, 3100); 
 
                         }else{

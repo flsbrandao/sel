@@ -1,6 +1,7 @@
 <?php
 Class Controller {
 
+    //Método construtor
     public function __construct(){
         session_start();
     }

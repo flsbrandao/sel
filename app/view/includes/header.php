@@ -13,7 +13,7 @@
     <script src="<?=BASE_URL?>app/view/assets/js/jquery/jquery.js"></script>
     <script src="<?=BASE_URL?>app/view/assets/js/sweet/sweetalert.js"></script>
 
-
+    <link rel="shortcut icon" href="<?=BASE_URL?>app/view/assets/img/icons/logo16.png" type="image/x-icon" />
     <title>SEL</title>
   </head>
 <body>
