@@ -35,11 +35,15 @@ Class Curso extends Controller{
 		$codigo = $_POST['codigo'];
 		$objCurso = new M_Curso(Conexao::getInstance());
 		$retorno = $objCurso->listar_curso($codigo);
-		// var_dump($codigo);
-		// var_dump($retorno);
-		//var_dump(json_encode($retorno));
 		echo json_encode($retorno);
-		
+	}
+
+	public function listar_dias(){
+
+		$codigo = $_POST['codigo'];
+		$objCurso = new M_Curso(Conexao::getInstance());
+		$retorno = $objCurso->listar_dias($codigo);
+		echo json_encode($retorno);
 	}
 
 }//Class

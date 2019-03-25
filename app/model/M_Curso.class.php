@@ -74,7 +74,7 @@ Class M_Curso extends Model{
 			$stm->bindValue(1, $codigo);
 			$stm->execute();
 
-			$dados = $stm->fetchAll(PDO::FETCH_ASSOC);
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
 
 			return $dados;
 
@@ -84,5 +84,22 @@ Class M_Curso extends Model{
 			return false;
 		}
 	}//listar_curso
+
+	public function listar_dias($codigo){
+		try{
+			$sql = "SELECT dias FROM tb_dias WHERE codigo_curso = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$codigo);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+			return $dados;
+			
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}
 
 }//Class

@@ -14,7 +14,6 @@
 
             <h1 class="display-4"><i class="far fa-edit text-primary"></i> Editar Curso Presencial</h1>
             <p class="mt-4">Os campos que tiverem * são de preenchimento obrigatório.</p>
-            <?php var_dump($_SESSION['curso'])?>
             <hr>
         </div>
 
@@ -123,7 +122,7 @@
                     <div class="form-row ml-1">
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="radio_curso" value="S" checked>Somente para servidores
+                                <input type="radio" class="form-check-input" name="radio_curso" value="S" id="radio1">Somente para servidores
                             </label>
                         </div>
 
@@ -134,7 +133,7 @@
 
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="radio_curso" value="A">Aberto ao público
+                                <input type="radio" class="form-check-input" name="radio_curso" value="A" id="radio2">Aberto ao público
                             </label>
                         </div>
                     </div>
@@ -275,6 +274,8 @@
         var codigo = "<?php echo $_SESSION['curso']?>";
         carregar_dados(codigo);
 
+         $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
+
     });
 
     //    O bloco de comando abaixo irá exibir ou não o campo de matrícula, de acordo com o que for selecionado pelo usuário
@@ -294,22 +295,56 @@
         }
     });
 
-    $(document).ready(function() {
-
-        $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
-    });
-
 
     function carregar_dados(codigo){
      
         $.ajax({
             type: 'POST',
             url: '<?=BASE_URL?>Curso/listar_curso',
+            dataType: "json",
             data: {'codigo': codigo},
             success: function(data){
-                alert(data);
-                $('#inputNomeCurso').val(data[0].nome);
                 swal.close();
+               //Carrega os dados nos campos
+                $('#inputNomeCurso').val(data[0].nome);
+                $('#inputInicio').val(data[0].inicio);
+                $('#inputHorario').val(data[0].horario);
+                $('#inputFim').val(data[0].fim);
+                $('#inputQuantidade').val(data[0].quant_aulas);
+                $('#inputLimitacao').val(data[0].limite_inscritos);
+                $('#txt_descricao').val(data[0].descricao);
+                
+                if(data[0].categoria === 'S'){
+                    $('#radio1').attr('checked', true);
+                }else{
+                    $('#radio2').attr('checked', true);
+                }
+
+                //O ajax abaixo irá buscar e carregar na tela os dias da semana
+                $.ajax({
+                    type:'POST',
+                    url: '<?=BASE_URL?>Curso/listar_dias',
+                    dataType: "json",
+                    data:{'codigo' : codigo},
+                    success: function(data){
+                        
+                        var total_array = data.length;
+                       
+                        for (var i = 0; i <= total_array ; i++) {
+                            //O for abaixo vai testar o valor de todos os checkbox, e ve se corresponde com o valor que veio do banco
+                            for (var a = 1; a <= 7; a++) {
+
+                                if($('#check' + a).val() === data[i].dias){
+                                    $('#check' + a).attr('checked', true);
+                                }
+                            }
+                        }
+                    },error : function(){
+                        alert('Unexpected error.');
+                    }
+                });
+
+
             }, beforeSend: function(){
                 swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
             }, error : function(){
