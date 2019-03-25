@@ -1,17 +1,17 @@
 <?php
 Class Curso extends Controller{
 
-	public function adicionar_curso(){
+	public function adicionar_turma(){
 
-		$nome = $_POST['inputNomeCurso'];
+		
 		$inicio = $_POST['inputInicio'];
 		$fim = $_POST['inputFim'];
 		$horario = $_POST['inputHorario'];
-		$total = $_POST['inputTotal'];
+		
 		$quantidade = $_POST['inputQuantidade'];
 		$limitar = $_POST['inputLimitacao'];
 		$categoria = $_POST['radio_curso'];
-		$descricao = $_POST['txt_descricao'];
+		
 		$dias = $_POST['dias'];
 
 		$objCurso = new M_Curso(Conexao::getInstance());
@@ -28,7 +28,26 @@ Class Curso extends Controller{
 		$_SESSION['curso'] = $codigo;
 
 		echo true;
+	}//adicionar_turma()
+
+	public function adicionar_curso(){
+
+		$nome = $_POST['inputNomeCurso'];
+		$total = $_POST['inputTotal'];
+		$descricao = $_POST['txt_descricao'];
+
+		$objCurso = new M_Curso(Conexao::getInstance());
+		$objCurso->adicionar_curso($nome,$total,$descricao);
+
+		echo true;
 	}//adicionar_curso()
+
+	public function listar_allcursos(){
+
+		$objCurso = new M_Curso(Conexao::getInstance());
+		$retorno = $objCurso->listar_allcursos();
+		echo json_encode($retorno);
+	}
 
 	public function listar_curso(){
 

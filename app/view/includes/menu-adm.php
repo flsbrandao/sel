@@ -15,9 +15,7 @@
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDropCursos">Curso Presencial</a>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_aberto">Abertos</a>
-                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_andamento">Em andamento</a>
-                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_encerrado">Encerrados</a>
+                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_cursos">Cursos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_adicionar">Adicionar curso</a>
                     </div>

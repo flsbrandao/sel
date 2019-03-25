@@ -1,7 +1,7 @@
 <?php
 Class M_Curso extends Model{
 
-	public function adicionar_curso($nome,$inicio,$fim,$horario,$total,$quantidade,$limitar,$categoria,$descricao){
+	public function adicionar_turma($nome,$inicio,$fim,$horario,$total,$quantidade,$limitar,$categoria,$descricao){
 
 		try{
 			$sql = "INSERT INTO tb_curso (nome, inicio, fim, horario, total_horas, quant_aulas,limite_inscritos,categoria, descricao) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -32,6 +32,23 @@ Class M_Curso extends Model{
 		}
 	}//adicionar_curso()
 
+	public function adicionar_curso($nome,$total,$descricao){
+		try{
+			$sql = "INSERT INTO tb_curso (nome, total_horas, descricao) VALUES (?,?,?)";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $nome);
+			$stm->bindValue(2, $total);
+			$stm->bindValue(3, $descricao);
+			$stm->execute();
+
+			return true;
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}
+
 	public function adicionar_dias($codigo, $dia){
 
 		try{
@@ -50,7 +67,7 @@ Class M_Curso extends Model{
 		}
 	}//adicionar_dias();
 
-	public function listar_cursos(){
+	public function listar_allcursos(){
 
 		try{
 			$sql = "SELECT * FROM tb_curso";
