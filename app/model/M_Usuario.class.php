@@ -82,4 +82,22 @@ Class M_Usuario extends Model{
 			 echo 'Erro: ' . $e->getMessage();
 		}
 	}// Valida CPF
-}
+
+	public function listar_usuarios($categoria){
+		try{
+			$sql = "SELECT id, nome, matricula, categoria FROM tb_usuario INNER JOIN tb_login ON (tb_usuario.cpf = tb_login.cpf) WHERE tb_login.tipo = 'est' AND categoria = ? ";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$categoria);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return $dados;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+			 return false;
+		}
+	}
+}//Class

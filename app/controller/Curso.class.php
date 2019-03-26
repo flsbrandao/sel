@@ -1,35 +1,6 @@
 <?php
 Class Curso extends Controller{
 
-	public function adicionar_turma(){
-
-		
-		$inicio = $_POST['inputInicio'];
-		$fim = $_POST['inputFim'];
-		$horario = $_POST['inputHorario'];
-		
-		$quantidade = $_POST['inputQuantidade'];
-		$limitar = $_POST['inputLimitacao'];
-		$categoria = $_POST['radio_curso'];
-		
-		$dias = $_POST['dias'];
-
-		$objCurso = new M_Curso(Conexao::getInstance());
-		$retorno = $objCurso->adicionar_curso($nome,$inicio,$fim,$horario,$total,$quantidade,$limitar,$categoria,$descricao);
-		//Irá contar o número total de vetores. Ao subtrair '1' desse numero
-	
-		$codigo = count($retorno);
-
-		//Insere os dias de curso
-		foreach ($dias as $valores => $v) {
-		 	$objCurso->adicionar_dias($codigo,$v);
-		}
-
-		$_SESSION['curso'] = $codigo;
-
-		echo true;
-	}//adicionar_turma()
-
 	public function adicionar_curso(){
 
 		$nome = $_POST['inputNomeCurso'];
@@ -37,9 +8,9 @@ Class Curso extends Controller{
 		$descricao = $_POST['txt_descricao'];
 
 		$objCurso = new M_Curso(Conexao::getInstance());
-		$objCurso->adicionar_curso($nome,$total,$descricao);
+		$retorno = $objCurso->adicionar_curso($nome,$total,$descricao);
 
-		echo true;
+		echo $retorno;
 	}//adicionar_curso()
 
 	public function listar_allcursos(){
@@ -57,12 +28,28 @@ Class Curso extends Controller{
 		echo json_encode($retorno);
 	}
 
-	public function listar_dias(){
+	public function desativar_curso(){
 
 		$codigo = $_POST['codigo'];
+
 		$objCurso = new M_Curso(Conexao::getInstance());
-		$retorno = $objCurso->listar_dias($codigo);
-		echo json_encode($retorno);
+		$retorno = $objCurso->desativar_curso($codigo);
+
+		echo $retorno;
+
+	}
+
+	public function editar_curso(){
+
+		$codigo = $_POST['codigo'];
+		$nome = $_POST['inputNomeCurso'];
+		$total = $_POST['inputTotal'];
+		$descricao = $_POST['txt_descricao'];
+
+		$objCurso = new M_Curso(Conexao::getInstance());
+		$retorno = $objCurso->editar_curso($codigo,$nome,$total,$descricao);
+
+		echo $retorno;
 	}
 
 }//Class

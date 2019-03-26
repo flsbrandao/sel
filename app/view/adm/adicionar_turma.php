@@ -12,7 +12,7 @@
 
         <div class="col-12 text-center mt-5">
 
-            <h1 class="display-4"><i class="fa fa-plus text-primary"></i> Adicionar Curso Presencial</h1>
+            <h1 class="display-4"><i class="fa fa-plus text-primary"></i> Adicionar Turma</h1>
             <p class="mt-4">Os campos que tiverem * são de preenchimento obrigatório.</p>
             <hr>
         </div>
@@ -31,8 +31,12 @@
 
                     <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
 
-                        <label class="" for="inputNomeCurso">Nome do Curso</label>
-                        <input type="text" class="form-control" name="inputNomeCurso" placeholder="Ex: Curso de Atendimento ao Público" required>
+                        <label class="" for="inputNomeCurso">Curso</label>
+                        <select class="form-control" id="slc_cursos" name="slc_cursos">
+
+                            <option value="">Selecione o curso</option>
+                                            
+                        </select>
 
                     </div>
 
@@ -42,15 +46,15 @@
 
                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="inputInicio">Início</label>
+                        <label class="" for="inputInicio">Início*</label>
                         <input type="date" class="form-control" name="inputInicio" required>
 
                     </div>
 
                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="inputHorario">Horário do Curso</label>
-                        <input type="text" class="form-control" name="inputHorario" id="inputHorario" required>
+                        <label class="" for="inputFim">Fim*</label>
+                        <input type="date" class="form-control" name="inputFim" required>
 
                     </div>
 
@@ -80,19 +84,12 @@
                       </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row mt-3">
 
-                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
+                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="inputFim">Fim</label>
-                        <input type="date" class="form-control" name="inputFim" required>
-
-                    </div>
-
-                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
-
-                        <label class="" for="inputTotal">Total de horas</label>
-                        <input type="text" class="form-control" name="inputTotal" required>
+                        <label class="" for="inputHorario">Horário do Curso*</label>
+                        <input type="text" class="form-control" name="inputHorario" id="inputHorario" required>
 
                     </div>
 
@@ -102,14 +99,14 @@
 
                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="aulas">Quantidade de Aulas</label>
+                        <label class="" for="aulas">Quantidade de Aulas*</label>
                         <input type="number" class="form-control" id="aulas" name="inputQuantidade" required>
 
                     </div>
 
                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="aulas">Limitar Inscritos</label>
+                        <label class="" for="aulas">Limitar Inscritos*</label>
                         <input type="number" class="form-control" id="aulas" name="inputLimitacao" required>
 
                     </div>
@@ -139,18 +136,7 @@
                     </div>
                 </div>
 
-                <div class="form-row mt-3">
-
-                    <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
-
-                        <label class="control-label">Descrição</label>
-                        <textarea class="form-control" name="txt_descricao" rows="6" maxlength="500" placeholder="Descreva o conteúdo. Máximo 500 carecteres."></textarea>
-
-                    </div>
-
-                </div>
-
-                <div class="form-row ml-1">
+                <div class="form-row ml-1 mt-4">
 
                     <div class="form-group ">
 
@@ -168,10 +154,14 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
+
+        carregar_cursos();
+
+        //Envia os dados informados para a Controller
         $("#formAdicionar").submit(function(event){
             $.ajax({
                 type: "POST",
-                url: "<?=BASE_URL?>Curso/adicionar_curso",
+                url: "<?=BASE_URL?>Turma/adicionar_turma",
                 data: $("#formAdicionar").serialize(),
                 success: function(data){
 
@@ -195,6 +185,25 @@
                 }
             });//AJAX
             return false;
+        });//submit
+    }); //document.ready
+
+    function carregar_cursos(){
+        $.ajax({
+            dataType: 'json',
+            url: '<?=BASE_URL?>Curso/listar_allcursos',
+            success: function(data){
+
+                for (var i = 0; data.length > i; i++){
+                    $('#slc_cursos').append('<option value="' + data[i].codigo + '">' + data[i].nome + '</option>');
+                }
+                swal.close();
+
+            },beforeSend: function() {
+                        swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+            },error: function() {
+                        alert('Unexpected error.');
+            }
         });
-    }); 
+    }//carregar_cursos()
 </script>

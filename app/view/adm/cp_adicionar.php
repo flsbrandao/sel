@@ -83,7 +83,7 @@
 
                         $('#formAdicionar').trigger("reset");
 
-                        swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 3000, button: false});
+                        swal("OK!","Curso adicionado com sucesso!", "success" ,{ timer: 3000, button: false});
                         //Depois de 3,5 segundos, o usuário será redirecionado
                          setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/cp_cursos'; }, 3100); 
                     }else{

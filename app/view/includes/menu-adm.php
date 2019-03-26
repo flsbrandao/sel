@@ -22,6 +22,17 @@
 
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDropTurmas">Turmas</a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/cp_cursos">Turmas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?=BASE_URL?>Adm/pagina/adicionar_turma">Adicionar turma</a>
+                    </div>
+
+                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?=BASE_URL?>Adm/pagina/instrutores">Instrutores</a>

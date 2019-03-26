@@ -1,28 +1,38 @@
 <table class="table table-hover">
-                    <thead>
-                        <tr>
-                          <th scope="col">Nome</th>
-<!--                          <th scope="col">Editar</th>-->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-
-                          <td>Rodrigo Maia</td>
-<!--                          <td><button type="submit" class="btn btn-success btn-sm"><i class="fas fa-pencil-alt"></i></button></td>-->
-                        </tr>
-                        <tr>
-                          <td>Marcos Pereira</td>
-<!--                          <td><button type="submit" class="btn btn-success btn-sm"><i class="fas fa-pencil-alt"></i></button></td>-->
-
-                        </tr>
-                          
-                        <tr>
-                          <td>José de Alencar</td>
-<!--                          <td><button type="submit" class="btn btn-success btn-sm"><i class="fas fa-pencil-alt"></i></button></td>-->
-
-                        </tr>
-
-                      </tbody>
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+         
+        </tr>
+    </thead>
+    <tbody id="table_municipes">
+        
+    </tbody>
 </table>
-  
+<script type="text/javascript">
+    
+$(document).ready(function() {
+
+    table_municipes();
+ });
+
+function table_municipes(){
+  $.ajax({
+    type: 'POST',
+    dataType:'json',
+    url:'<?=BASE_URL?>Usuario/listar_usuarios',
+    data: {'categoria' : 'M'},
+    success: function(data){
+      swal.close();
+      for(var i = 0; data.length > 0; i++){
+        $('#table_municipes').append('<tr><td>' + data[i].nome + '</td><td></tr>');
+      }
+
+    }, beforeSend: function() {
+                        swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+    },error: function() {
+        alert('Unexpected error.');
+    }
+  });
+}
+</script>

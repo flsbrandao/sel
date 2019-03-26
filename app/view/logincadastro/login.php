@@ -7,7 +7,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    <img class="card-img-top" src="<?=BASE_URL?>app/view/assets/img/icons/logo300.png" alt="SEL">
+                    <img class="card-img-top" src="<?=BASE_URL?>app/view/assets/img/icons/logo286_180.png" alt="SEL">
                     <form id="formLogar">
 
                         <div class="col-auto">

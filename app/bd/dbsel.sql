@@ -28,7 +28,7 @@ CREATE TABLE tb_usuario(
     numero int(10) not null,
     complemento varchar(15),
     categoria enum('S','M'),
-    matricula varchar(10),
+    matricula varchar(10) unique,
     foreign key (cep) references tb_endereco (cep)
 )default charset = utf8;    
 
@@ -48,10 +48,11 @@ create table tb_curso(
 	codigo int auto_increment primary key,
     nome varchar(50) not null,
     descricao text(500),
-    total_horas varchar(6) not null
+    total_horas varchar(6) not null,
+    situacao enum('A','D') default 'A'
 );
 
-create  table tb_turma(
+create table tb_turma(
 	codigo int auto_increment primary key,
     cod_curso int,
 	inicio date not null,
@@ -59,6 +60,8 @@ create  table tb_turma(
     quant_aulas int not null,
     categoria enum ('S','A') not null,
     limite_inscritos int,
+	situacao enum('A','D') default 'A',
+    sit_turma varchar(2) default 'AB' not null,
     foreign key (cod_curso) references tb_curso (codigo) 
 );
 
