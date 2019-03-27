@@ -7,7 +7,9 @@
             <div class="card">
 
                 <div class="card-body">
-                    <img class="img-responsive" src="<?=BASE_URL?>app/view/assets/img/icons/logo300.png" alt="SEL">
+                    <div class="img-login">
+                        <img class="img-responsive " src="<?=BASE_URL?>app/view/assets/img/icons/logo300.png" alt="SEL">
+                    </div>
                     <form id="formLogar">
 
                         <div class="col-auto">
