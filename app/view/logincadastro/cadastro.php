@@ -103,13 +103,20 @@
                     <div class="form-group col-lg-3 col-md-3 col-sm-4 col-12">
 
                         <label for="inputCpf">CPF *</label>
-                        <input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder="123.456.789-0" required>
+                        <input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder="123.456.789-0" required role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Digite somente números">
+
+                    </div>
+
+                    <div class="form-group col-lg-3 col-md-3 col-sm-4 col-12">
+
+                        <label for="inputCpf">RG *</label>
+                        <input type="text" class="form-control" id="inputRg" name="inputRg" placeholder="12.345.679-X" required  role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="" data-content="Digite exatamente como consta no RG">
 
                     </div>
 
                     <div class="form-group col-12 col-md-3 col-sm-4 col-lg-3">
 
-                      <label class="label_formulario" for="inputData">Data de Nascimento *</label>
+                      <label class="label_formulario" for="inputData">Data de Nascimento*</label>
                       <input type="date" class="form-control" id="inputData" name="inputData" required>
 
                     </div>
@@ -364,7 +371,7 @@
                 success: function(data){
 
                     if(data == true){
-                         swal( "Atenção!", "CPF já cadastrado no sistema!", "warning");
+                         swal( "Atenção!", "CPF inválido! Tente novamente.", "warning");
                          $("#inputCpf").val("");
                     }
 
@@ -384,7 +391,7 @@
                 success: function(data){
 
                     if(data == true){
-                         swal( "Atenção!", "Login já cadastrado no sistema!", "warning");
+                         swal( "Atenção!", "Login inválido! Tente novamente.", "warning");
                          $("#inputLogin").val("");
                     }
 
@@ -415,6 +422,46 @@
             });
 
         });//Valida email
+
+         $("#inputMatricula").blur(function(){
+            
+            $.ajax({
+                type:"POST",
+                url: "<?=BASE_URL?>Cadastro/validar_matricula",
+                data: {'matricula': $("#inputMatricula").val()},
+
+                success: function(data){
+
+                    if(data == true){
+                         swal( "Atenção!", "Matrícula já cadastrada no sistema!", "warning");
+                         $("#inputMatricula").val("");
+                    }
+
+                },error: function(){
+                    alert('Unexpected ERROR.')
+                }
+            });
+        });//Validar Matricula
+
+        $("#inputRg").blur(function(){
+            
+            $.ajax({
+                type:"POST",
+                url: "<?=BASE_URL?>Cadastro/validar_rg",
+                data: {'rg': $("#inputRg").val()},
+
+                success: function(data){
+
+                    if(data == true){
+                         swal( "Atenção!", "RG já cadastrado no sistema!", "warning");
+                         $("#inputRg").val("");
+                    }
+
+                },error: function(){
+                    alert('Unexpected ERROR.')
+                }
+            });
+        });//Validar Matricula
 
          $(function(){
               var regex = new RegExp('[^0-9a-zA-Zàèìòùáéíóúâêîôûãõ\b]', 'g');

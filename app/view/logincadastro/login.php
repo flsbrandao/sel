@@ -2,12 +2,12 @@
 
     <div class="wrapper">
 
-        <div class="col-lg-6 col-12 col-md-6">
+        <div class="col-lg-5 col-12 col-md-6">
 
             <div class="card">
 
                 <div class="card-body">
-                    <img class="card-img-top" src="<?=BASE_URL?>app/view/assets/img/icons/logo286_180.png" alt="SEL">
+                    <img class="img-responsive" src="<?=BASE_URL?>app/view/assets/img/icons/logo300.png" alt="SEL">
                     <form id="formLogar">
 
                         <div class="col-auto">

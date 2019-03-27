@@ -14,23 +14,24 @@
 
     <div class="col-lg-12">
 
-        <table class="table table-hover table-responsive">
-            <thead>
-                <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Curso</th>
-                    <th scope="col">Total de Horas</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Excluir</th>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Curso</th>
+                        <th scope="col">Total de Horas</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
 
-                </tr>
-            </thead>
-            <tbody id="cursos">
+                    </tr>
+                </thead>
+                <tbody id="cursos">
 
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div> <!-- container -->
@@ -41,7 +42,7 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-header  bg-info text-light">
 
                 <h5 class="modal-title">Descrição do curso</h5>
                 <button type="button" class="close" data-dismiss="modal">
@@ -81,7 +82,7 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-header bg-info text-light">
 
                 <h5 class="modal-title">Editar Curso</h5>
                 <button type="button" class="close" data-dismiss="modal">
@@ -254,13 +255,13 @@
                     value: true,
                     visible: true,
                     className: "btn-confirm"
-                    // closeModal: true
+                    
                 },
                 cancel: {
                     text: "Não",
                     value: false,
                     visible: true,
-                    className: "",
+                    className: "btn-cancel",
                     closeModal: true,
                 }
             },

@@ -19,6 +19,7 @@ INSERT INTO tb_endereco(cep, logradouro, bairro, cidade,estado) VALUES ('06816-0
 CREATE TABLE tb_usuario(
 	id int unique auto_increment,
 	cpf varchar(14) not null primary key,
+    rg varchar(16) not null unique,
     nome varchar(60) not null,
     data_nasc date not null,
     email varchar(30) not null unique,
@@ -28,21 +29,21 @@ CREATE TABLE tb_usuario(
     numero int(10) not null,
     complemento varchar(15),
     categoria enum('S','M'),
-    matricula varchar(10) unique,
+    matricula varchar(10),
     foreign key (cep) references tb_endereco (cep)
 )default charset = utf8;    
 
-INSERT INTO tb_usuario (cpf,nome,data_nasc,email,celular,cep,numero, categoria) VALUES ('123.456.789-10','Hercule Poirot','1880-08-18','hercule@poirot.com','97070-7070','06816-000','100','S');
+INSERT INTO tb_usuario (cpf,rg,nome,data_nasc,email,celular,cep,numero, categoria) VALUES ('123.456.789-10','43.543.123.-X','Hercule Poirot','1880-08-18','hercule@poirot.com','97070-7070','06816-000','100','S');
 
 create table tb_login(
 	cpf varchar(14),
     login varchar(15) not null primary key,
     senha varchar(255) not null,
-	tipo varchar(3) default 'est' not null,
+	tipo varchar(1) default 'E' not null,
     foreign key (cpf) references tb_usuario(cpf)
 )default charset = utf8;
 
-INSERT INTO tb_login (cpf,login,senha,tipo) VALUES ('123.456.789-10', 'poirot', '8d36e3638d7f63b4851e29c2bff55ed7f3b32590e911b20885cc661e7242e9e0c436dd2938ab63e585a63b3357e89a5983ab50416ec0b54a853ac4b92826ea62', 'adm');
+INSERT INTO tb_login (cpf,login,senha,tipo) VALUES ('123.456.789-10', 'poirot', '8d36e3638d7f63b4851e29c2bff55ed7f3b32590e911b20885cc661e7242e9e0c436dd2938ab63e585a63b3357e89a5983ab50416ec0b54a853ac4b92826ea62', 'A');
 
 create table tb_curso(
 	codigo int auto_increment primary key,

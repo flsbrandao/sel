@@ -8,7 +8,7 @@ Class Estudante extends Controller{
     public function pagina($pagina){
     
        //Verifica se o usuário está logado e se a pagina corresponde ao seu tipo de usuario
-        if(parent::verifica_login() && parent::valida_usuario('est')){
+        if(parent::verifica_login() && parent::valida_usuario('E')){
 
              $arquivo = "app/view/estudante/" . $pagina .".php";
         

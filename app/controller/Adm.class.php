@@ -10,7 +10,7 @@ Class Adm extends Controller{
 	public function pagina($pagina){
 
         //Verifica se o usuário está logado e se a pagina corresponde ao seu tipo de usuario
-        if(parent::verifica_login() && parent::valida_usuario('adm')){
+        if(parent::verifica_login() && parent::valida_usuario('A')){
         
             $arquivo = "app/view/adm/" . $pagina .".php";
             

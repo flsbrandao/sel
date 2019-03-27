@@ -21,7 +21,7 @@ function table_municipes(){
     type: 'POST',
     dataType:'json',
     url:'<?=BASE_URL?>Usuario/listar_usuarios',
-    data: {'categoria' : 'M'},
+    data: {'categoria' : 'M', 'tipo' : 'E'},
     success: function(data){
       swal.close();
       for(var i = 0; data.length > 0; i++){

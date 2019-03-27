@@ -52,21 +52,8 @@ Class M_Login extends Model{
 					$_SESSION['nome'] = $nome[0];
 
 				}
-
-				if($tipo === 'adm'){
-					//Caso o usuário for ADM
-					$usuario = "A";
-
-				}else if($tipo === 'ins'){
-					//Caso o usuário for Instrutor
-					$usuario = "I";
-
-				}else{
-					//Se não for nenhuma das opções anteriores, só pode ser Estudante
-					$usuario = "E";
-				}
-
-				return $usuario;
+				
+				return $tipo;
 
 			}else{
 				session_unset(); //Limpa todas as váriaveis de sessão
@@ -114,4 +101,22 @@ Class M_Login extends Model{
 			 echo 'Erro: ' . $e->getMessage();
 		}
 	} // validar login
+
+	public function	alterar_tipo_usuario($cpf,$tipo){
+		try{
+			$sql = "UPDATE tb_login SET tipo = ? WHERE cpf = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $tipo);
+			$stm->bindValue(2, $cpf);
+			$stm->execute();
+
+			return true; 
+			
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+			 return false;
+		}
+	}//alterar_tipo_usuario()
+
 }//Class

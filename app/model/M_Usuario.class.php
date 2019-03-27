@@ -1,22 +1,23 @@
 <?php 
 Class M_Usuario extends Model{
 
-	public function cadastro($cpf,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula){
+	public function cadastro($cpf,$rg,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula){
 
 		try{
 
-			$sql = "INSERT INTO tb_usuario (cpf,nome,data_nasc,email,celular,telefone,numero,complemento,categoria,matricula) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			$sql = "INSERT INTO tb_usuario (cpf,rg,nome,data_nasc,email,celular,telefone,numero,complemento,categoria,matricula) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			$stm = $this->pdo->prepare($sql);
 			$stm->bindValue(1, $cpf);
-			$stm->bindValue(2, $nome);
-			$stm->bindValue(3, $data_nasc);
-			$stm->bindValue(4, $email);
-			$stm->bindValue(5, $celular);
-			$stm->bindValue(6, $telefone);
-			$stm->bindValue(7, $numero);
-			$stm->bindValue(8, $complemento);
-			$stm->bindValue(9, $categoria);
-			$stm->bindValue(10, $matricula);
+			$stm->bindValue(2, $rg);
+			$stm->bindValue(3, $nome);
+			$stm->bindValue(4, $data_nasc);
+			$stm->bindValue(5, $email);
+			$stm->bindValue(6, $celular);
+			$stm->bindValue(7, $telefone);
+			$stm->bindValue(8, $numero);
+			$stm->bindValue(9, $complemento);
+			$stm->bindValue(10, $categoria);
+			$stm->bindValue(11, $matricula);
 			$stm->execute();
 
 			return true;
@@ -83,11 +84,66 @@ Class M_Usuario extends Model{
 		}
 	}// Valida CPF
 
-	public function listar_usuarios($categoria){
+	public function validar_matricula($matricula){
+
 		try{
-			$sql = "SELECT id, nome, matricula, categoria FROM tb_usuario INNER JOIN tb_login ON (tb_usuario.cpf = tb_login.cpf) WHERE tb_login.tipo = 'est' AND categoria = ? ";
+			$sql = "SELECT * FROM tb_usuario WHERE matricula = ?";
 			$stm = $this->pdo->prepare($sql);
-			$stm->bindValue(1,$categoria);
+			$stm->bindValue(1, $matricula);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+
+			if($rows === 1){
+
+				$retorno = true;
+
+			}else{
+
+				$retorno = false;
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+		}
+	}//valida_matricula()
+
+	public function validar_rg($rg){
+
+		try{
+			$sql = "SELECT * FROM tb_usuario WHERE rg = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $rg);
+			$stm->execute();
+
+			$rows = $stm->rowCount();
+
+			if($rows === 1){
+
+				$retorno = true;
+
+			}else{
+
+				$retorno = false;
+			}
+
+			return $retorno;
+
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+		}
+	}//valida_rg()
+
+	public function listar_usuarios($tipo,$categoria){
+		try{
+			$sql = "SELECT tb_usuario.cpf, nome, matricula, categoria FROM tb_usuario INNER JOIN tb_login ON (tb_usuario.cpf = tb_login.cpf) WHERE tb_login.tipo = ? AND categoria = ? ";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$tipo);
+			$stm->bindValue(2,$categoria);
 			$stm->execute();
 
 			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -99,5 +155,23 @@ Class M_Usuario extends Model{
 			 echo 'Erro: ' . $e->getMessage();
 			 return false;
 		}
-	}
+	}//Listar_usuarios()
+
+	public function alterar_servidor_municipe($cpf,$categoria){
+		try{
+			$sql = "UPDATE tb_usuario SET categoria = ? WHERE cpf = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $categoria);
+			$stm->bindValue(2, $cpf);
+			$stm->execute();
+
+			return true; 
+			
+		}catch(PDOException $e){
+
+			 echo 'Erro: ' . $e->getMessage();
+			 return false;
+		}
+	}//alterar_servidor_municipe()
+
 }//Class

@@ -13,6 +13,7 @@ Class Cadastro extends Controller{
 
 		$nome = $_POST['inputNome'];
 		$cpf = $_POST['inputCpf'];
+		$rg = $_POST['inputRg'];
 		$data_nasc = $_POST['inputData'];
 		$email = $_POST['inputEmail'];
 		$celular = $_POST['inputCelular'];
@@ -46,7 +47,7 @@ Class Cadastro extends Controller{
 		$salt = 'wilhelmklaus2019'.$senha.'sherlokholmes';
         $hasha = hash('sha512', $salt);
 
-		$retorno1 = $objUsuario->cadastro($cpf,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula);
+		$retorno1 = $objUsuario->cadastro($cpf,$rg,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula);
 		$retorno2 = $objLogin->cadastro($cpf,$login,$hasha);
 		
 		$retorno = '0';
@@ -96,6 +97,26 @@ Class Cadastro extends Controller{
 
 		$objUsuario = new M_Usuario(Conexao::getInstance());
 		$retorno = $objUsuario->validar_email($email);
+
+		echo $retorno;
+	}
+
+	public function validar_matricula(){
+
+		$matricula = $_POST['matricula'];
+
+		$objUsuario = new M_Usuario(Conexao::getInstance());
+		$retorno = $objUsuario->validar_matricula($matricula);
+
+		echo $retorno;
+	}
+
+	public function validar_rg(){
+
+		$rg = $_POST['rg'];
+
+		$objUsuario = new M_Usuario(Conexao::getInstance());
+		$retorno = $objUsuario->validar_rg($rg);
 
 		echo $retorno;
 	}
