@@ -169,9 +169,9 @@
 
                         $('#formAdicionar').trigger("reset");
 
-                        swal("OK!","Cadastro realizado com sucesso!", "success" ,{ timer: 3000, button: false});
+                        swal("OK!","Turma adicionada com sucesso!", "success" ,{ timer: 3000, button: false});
                         //Depois de 3,5 segundos, o usuário será redirecionado
-                         setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/cp_editar'; }, 3100); 
+                         setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar'; }, 3100); 
                     }else{
                         swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
                     }

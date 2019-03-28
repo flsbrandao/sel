@@ -66,6 +66,14 @@ create table tb_turma(
     foreign key (cod_curso) references tb_curso (codigo) 
 );
 
+create table tb_inscricao(
+	cod_inscricao int auto_increment primary key,
+    cod_turma int,
+    cpf_usuario varchar(14),
+    foreign key (cod_turma) references tb_turma (codigo),
+    foreign key (cpf_usuario) references tb_usuario(cpf)
+);
+
 create table tb_instrutor_ext(
 	cpf varchar(14) not null primary key,
     nome varchar(60) not null,
@@ -73,8 +81,15 @@ create table tb_instrutor_ext(
     situacao enum('A','D') default 'A'
 );
 
+create table tb_lecionar(
+	cod_turma int,
+    cpf_instrutor varchar(14),
+    foreign key (cod_turma) references tb_turma(codigo),
+    foreign key (cpf_instrutor) references tb_usuario(cpf)
+);
+
 create table tb_dias(
-	codigo_curso int,
+	codigo_turma int,
     dias varchar(3) not null,
 	horario varchar(5) not null,
     foreign key (codigo_turma) references tb_turma (codigo)

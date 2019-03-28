@@ -12,7 +12,7 @@
 
         <div class="col-12 text-center mt-5">
 
-            <h1 class="display-4"><i class="far fa-edit text-primary"></i> Editar Curso Presencial</h1>
+            <h1 class="display-4"><i class="far fa-edit text-primary"></i> Editar Turma</h1>
             <p class="mt-4">Os campos que tiverem * são de preenchimento obrigatório.</p>
             <hr>
         </div>
@@ -26,13 +26,31 @@
 
             <form id="formAdicionar">
 
+                <div class="form-row">
+                    
+                     <div class="form-group col-md-3 col-sm-3 col-12 col-lg-3">
+
+                        <label class="" for="inputNomeCurso">Código da Turma</label>
+                        <input type="text" class="form-control" name="inputCodTurma" id="inputCodTurma" readonly>
+
+                    </div>
+
+                </div>
+
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
+                    <div class="form-group col-md-9 col-sm-9 col-12 col-lg-9">
 
                         <label class="" for="inputNomeCurso">Nome do Curso</label>
-                        <input type="text" class="form-control" name="inputNomeCurso" id="inputNomeCurso" placeholder="Ex: Curso de Atendimento ao Público" required>
+                        <input type="text" class="form-control" name="inputNomeCurso" id="inputNomeCurso" readonly>
+
+                    </div>
+
+                    <div class="form-group col-md-3 col-sm-3 col-12 col-lg-3">
+
+                        <label class="" for="inputNomeCurso">Código do Curso</label>
+                        <input type="text" class="form-control" name="inputCodCurso" id="inputCodCurso" readonly>
 
                     </div>
 
@@ -49,8 +67,8 @@
 
                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="inputHorario">Horário do Curso</label>
-                        <input type="text" class="form-control" name="inputHorario" id="inputHorario" required>
+                        <label class="" for="inputFim">Fim</label>
+                        <input type="date" class="form-control" name="inputFim" id="inputFim" required>
 
                     </div>
 
@@ -82,17 +100,10 @@
 
                 <div class="form-row mt-2">
 
-                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
+                     <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
 
-                        <label class="" for="inputFim">Fim</label>
-                        <input type="date" class="form-control" name="inputFim" id="inputFim" required>
-
-                    </div>
-
-                    <div class="form-group col-md-6 col-sm-6 col-12 col-lg-6">
-
-                        <label class="" for="inputTotal">Total de horas</label>
-                        <input type="text" class="form-control" name="inputTotal" id="inputTotal" required>
+                        <label class="" for="inputHorario">Horário do Curso</label>
+                        <input type="text" class="form-control" name="inputHorario" id="inputHorario" required>
 
                     </div>
 
@@ -139,18 +150,7 @@
                     </div>
                 </div>
 
-                <div class="form-row mt-3">
-
-                    <div class="form-group col-md-12 col-sm-12 col-12 col-lg-12">
-
-                        <label class="control-label">Descrição</label>
-                        <textarea class="form-control" name="txt_descricao" id="txt_descricao" rows="6" maxlength="500" placeholder="Descreva o conteúdo. Máximo 500 carecteres."></textarea>
-
-                    </div>
-
-                </div>
-
-                <div class="form-row ml-1">
+                <div class="form-row ml-1 mt-3">
 
                     <div class="form-group ">
 
@@ -199,7 +199,7 @@
 
             <div class="form-group ">
 
-                <a type="submit" class="btn btn-success" href="#" data-toggle="modal" data-target="#modalInstrutor">Adicionar Instrutor</a>
+                <button type="submit" class="btn btn-success" onclick="adicionar_instrutor()">Adicionar Instrutor</button>
 
             </div>
 
@@ -216,7 +216,7 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-header bg-info text-light">
 
                 <h5 class="modal-title">Adicionar Instrutor</h5>
                 <button type="button" class="close" data-dismiss="modal">
@@ -271,7 +271,7 @@
 <script>
     $(document).ready(function() {
 
-        var codigo = "<?php echo $_SESSION['curso']?>";
+        var codigo = "<?php echo $_SESSION['turma']?>";
         carregar_dados(codigo);
 
          $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
@@ -300,20 +300,21 @@
      
         $.ajax({
             type: 'POST',
-            url: '<?=BASE_URL?>Curso/listar_curso',
+            url: '<?=BASE_URL?>Turma/carregar_turma',
             dataType: "json",
             data: {'codigo': codigo},
             success: function(data){
                 swal.close();
                //Carrega os dados nos campos
+                $('#inputCodTurma').val(data[0].cod_turma)
                 $('#inputNomeCurso').val(data[0].nome);
+                $('#inputCodCurso').val(data[0].cod_curso)
                 $('#inputInicio').val(data[0].inicio);
                 $('#inputHorario').val(data[0].horario);
                 $('#inputFim').val(data[0].fim);
-                $('#inputQuantidade').val(data[0].quant_aulas);
-                $('#inputLimitacao').val(data[0].limite_inscritos);
-                $('#txt_descricao').val(data[0].descricao);
-                
+                $('#inputQuantidade').val(data[0].quantidade);
+                $('#inputLimitacao').val(data[0].limite);
+             
                 if(data[0].categoria === 'S'){
                     $('#radio1').attr('checked', true);
                 }else{
@@ -323,7 +324,7 @@
                 //O ajax abaixo irá buscar e carregar na tela os dias da semana
                 $.ajax({
                     type:'POST',
-                    url: '<?=BASE_URL?>Curso/listar_dias',
+                    url: '<?=BASE_URL?>Turma/listar_dias',
                     dataType: "json",
                     data:{'codigo' : codigo},
                     success: function(data){
@@ -338,7 +339,11 @@
                                     $('#check' + a).attr('checked', true);
                                 }
                             }
+
+                             $('#inputHorario').val(data[i].horario);
                         }
+
+                       
                     },error : function(){
                         alert('Unexpected error.');
                     }
@@ -352,5 +357,11 @@
             }
         });
        }//carregar dados
+
+       function adicionar_instrutor(turma){
+
+        $('#modalInstrutor').modal('show');
+        
+       }
 
 </script>
