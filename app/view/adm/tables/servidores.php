@@ -1,5 +1,6 @@
+<div class="table-responsive">
 <table class="table table-hover">
-    <thead>
+    <thead class="thead-light">
         <tr>
             <th scope="col">Nome</th>
             <th scope="col">Matrícula</th>

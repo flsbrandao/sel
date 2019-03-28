@@ -1,14 +1,16 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Nome</th>
-         
-        </tr>
-    </thead>
-    <tbody id="table_municipes">
-        
-    </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-hover">
+      <thead class="thead-light">
+          <tr>
+              <th scope="col">Nome</th>
+           
+          </tr>
+      </thead>
+      <tbody id="table_municipes">
+          
+      </tbody>
+  </table>
+</div>
 <script type="text/javascript">
     
 $(document).ready(function() {
@@ -25,7 +27,7 @@ function table_municipes(){
     success: function(data){
       swal.close();
       for(var i = 0; data.length > 0; i++){
-        $('#table_municipes').append('<tr><td>' + data[i].nome + '</td><td></tr>');
+        $('#table_municipes').append('<tr><td>' + data[i].nome + '</td></tr>');
       }
 
     }, beforeSend: function() {

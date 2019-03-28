@@ -1,16 +1,17 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Matrícula</th>
-            <th scope="col">Excluir</th>
-        </tr>
-    </thead>
-    <tbody id="table_instrutores">
+<div class="table-responsive"> 
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="table_instrutores">
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 <script>
 
 $(document).ready(function(){

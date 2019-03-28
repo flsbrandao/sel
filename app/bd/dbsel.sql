@@ -66,6 +66,13 @@ create table tb_turma(
     foreign key (cod_curso) references tb_curso (codigo) 
 );
 
+create table tb_instrutor_ext(
+	cpf varchar(14) not null primary key,
+    nome varchar(60) not null,
+    descricao text(300),
+    situacao enum('A','D') default 'A'
+);
+
 create table tb_dias(
 	codigo_curso int,
     dias varchar(3) not null,

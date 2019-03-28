@@ -32,4 +32,30 @@ Class Adm extends Controller{
     public function table($tabela){
         require_once("app/view/adm/tables/" . $tabela . ".php");
     }
-}
+
+    public function adicionar_instrutor_ext(){
+        $cpf = $_POST['inputCpf'];
+        $nome = $_POST['inputNome'];
+        $descricao = $_POST['txt_descricao'];
+
+        $objInstrutor = new M_InstrutorExterno(Conexao::getInstance());
+        $retorno = $objInstrutor->adicionar_instrutor_ext($cpf,$nome,$descricao);
+
+        echo $retorno;
+    }//adicionar_instrutor_ext()
+
+    public function listar_instrutor_ext(){
+
+        $objInstrutor = new M_InstrutorExterno(Conexao::getInstance());
+        $retorno = $objInstrutor->listar_instrutor_ext();
+
+        echo json_encode($retorno);
+    }
+
+    public function desativa_instrutor_ext(){
+        $cpf = $_POST['cpf'];
+        $objInstrutor = new M_InstrutorExterno(Conexao::getInstance());
+        $retorno = $objInstrutor->desativa_instrutor_ext($cpf);
+        echo $retorno;
+    }//desativa_instrutor_ext()
+}//Class
