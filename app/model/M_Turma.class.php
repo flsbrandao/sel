@@ -82,4 +82,59 @@ Class M_Turma extends Model {
 			return false;
 		}
 	}//carregar_turma()
+
+	//Adiciona instrutor servidor
+	public function adicionar_instrutor_ser($codigo,$value){
+		try{
+			$sql = "INSERT INTO tb_lecionar (cod_turma, cpf_servidor) VALUES (?,?)";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$codigo);
+			$stm->bindValue(2,$value);
+			$stm->execute();
+
+			return true;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//adicionar_instrutor_ser()
+
+	//Adiciona instrutor servidor
+	public function adicionar_instrutor_ext($codigo,$value){
+		try{
+			$sql = "INSERT INTO tb_lecionar (cod_turma, cpf_externo) VALUES (?,?)";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$codigo);
+			$stm->bindValue(2,$value);
+			$stm->execute();
+
+			return true;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//adicionar_instrutor_ser()
+
+	public function carrega_instrutor_ser($cod_turma){
+		try{
+			$sql = "SELECT tb_usuario.nome as nome_servidor,  cpf_servidor FROM tb_lecionar INNER JOIN tb_usuario ON (tb_usuario.cpf = tb_lecionar.cpf_servidor) WHERE cod_turma = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$cod_turma);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return $dados;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//carrega_instrutor_ser();
+
 }//Class

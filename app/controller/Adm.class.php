@@ -8,7 +8,7 @@ Class Adm extends Controller{
 
     //Carrega as páginas
 	public function pagina($pagina){
-
+     
         //Verifica se o usuário está logado e se a pagina corresponde ao seu tipo de usuario
         if(parent::verifica_login() && parent::valida_usuario('A')){
         

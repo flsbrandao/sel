@@ -83,9 +83,11 @@ create table tb_instrutor_ext(
 
 create table tb_lecionar(
 	cod_turma int,
-    cpf_instrutor varchar(14),
-    foreign key (cod_turma) references tb_turma(codigo),
-    foreign key (cpf_instrutor) references tb_usuario(cpf)
+    cpf_externo varchar(14),
+    cpf_servidor varchar(14),
+	foreign key (cod_turma) references tb_turma(codigo),
+    foreign key (cpf_externo) references tb_instrutor_ext(cpf),
+    foreign key (cpf_servidor) references tb_usuario(cpf)
 );
 
 create table tb_dias(

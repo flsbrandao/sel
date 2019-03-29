@@ -165,43 +165,62 @@
         </div>
     </div>
 
+     <div class="row">
+
+        <div class="col-12 text-center mt-5">
+
+            <h3 class="display-4">Instrutores</h3>
+
+            <div class="form-group mt-3">
+
+                <div class="btn-group" role="group">
+               
+                    <button type="button" class="btn btn-success" autocomplete="off" onclick="adicionar_servidor($('#inputCodTurma').val())"><i class="fas fa-plus"></i> Servidor</button>
+            
+                    <button type="button" class="btn btn-success" autocomplete="off" onclick="adicionar_externo($('#inputCodTurma').val())"><i class="fas fa-plus"></i> Externo</button>
+
+                </div>
+
+            </div>
+            <hr>
+        </div>
+
+    </div>
+
     <div class="row justify-content-center mt-3">
 
-        <div class="col-lg-10">
+        <div class="col-lg-12 table-responsive">
 
             <table class="table table-hover">
-                <thead>
+                <thead class="thead-light">
                     <tr>
-                        <th scope="col">Instrutor</th>
+                        <th scope="col">Instrutor Servidor</th>
                         <th scope="col">Excluir</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-
-                        <td>Jair Bolsonaro</td>
-                        <td><button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button></td>
-                    </tr>
-                    <tr>
-
-                        <td>Fernando Haddad</td>
-                        <td><button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button></td>
-
-                    </tr>
+                <tbody id="tabela_servidor">
 
                 </tbody>
             </table>
 
-
         </div>
 
-        <div class="form-row ml-1">
+        <hr>
 
-            <div class="form-group ">
+         <div class="col-lg-12 table-responsive mt-5">
 
-                <button type="submit" class="btn btn-success" onclick="adicionar_instrutor()">Adicionar Instrutor</button>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Instrutor Externo</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela_externo">
 
-            </div>
+                </tbody>
+            </table>
+
 
         </div>
 
@@ -210,15 +229,15 @@
 
 <!-- ### MODAL #### -->
 
-<div class="modal fade" id="modalInstrutor" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalServidor" tabindex="-1" role="dialog">
 
-    <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-dialog  modal-md" role="document">
 
         <div class="modal-content">
 
             <div class="modal-header bg-info text-light">
 
-                <h5 class="modal-title">Adicionar Instrutor</h5>
+                <h5 class="modal-title">Adicionar Instrutor Servidor</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -229,22 +248,29 @@
 
                 <div class="row justify-content-center">
 
-                    <div class="form-group">
+                    <div class="table-responsive col-lg-12">
 
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <form id="formAddInstrutor">
+                            <input type="hidden" name="inputModalTurma" id="inputModalTurma">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Adicionar</th>
 
+                                    </tr>
+                                </thead>
+                                <tbody id="table_servidor">
+                                </tbody>
+                            </table>
 
-                            <label class="btn btn-success active">
-                                <input type="radio" name="nservidor" value="servidor" id="servidor" autocomplete="off"> Servidores
-                            </label>
+                            <div class="row float-right mr-3">
+                                <button type="submit" class="btn btn-success">Adicionar</button>
+                            </div>
 
-                            <label class="btn btn-success">
-                                <input type="radio" name="servidor" value="externo" id="externo" autocomplete="off"> Externos
-                            </label>
+                        </form>
 
-                        </div>
-
-                    </div>
+                    </div>  
 
                 </div>
 
@@ -256,30 +282,137 @@
 
             </div>
 
-            <div class="modal-footer">
+        </div>
+    </div>
 
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                    Fechar
+</div> <!-- modal servidor-->
+
+
+<div class="modal fade" id="modalExterno" tabindex="-1" role="dialog">
+
+    <div class="modal-dialog  modal-md" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-info text-light">
+
+                <h5 class="modal-title">Adicionar Instrutor Externo</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
                 </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row justify-content-center">
+
+                    <div class="table-responsive col-lg-12">
+
+                        <form id="formAddExterno">
+                            <input type="hidden" name="inputModalTurmaExt" id="inputModalTurmaExt">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Adicionar</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="table_externo">
+                                </tbody>
+                            </table>
+
+                            <div class="row float-right mr-3">
+                                <button type="submit" class="btn btn-success">Adicionar</button>
+                            </div>
+
+                        </form>
+
+                    </div>  
+
+                </div>
+
+                <div class="col-lg-12">
+
+                    <div id="instrutor"></div>
+
+                </div>
+
             </div>
 
         </div>
     </div>
 
-</div>
+</div> <!-- modal externo-->
 
 <script>
     $(document).ready(function() {
-
-        var codigo = "<?php echo $_SESSION['turma']?>";
+        //Pega o id do curso e carrega suas informações na tela
+        var codigo = <?php echo $_GET['turma']?>;
         carregar_dados(codigo);
+        tabela_servidor(codigo);
 
-         $('#instrutor').load("<?=BASE_URL?>Adm/table/add_instrutorservidor");
+                //Adiciona instrutor
+        $('#formAddInstrutor').submit(function(event){
+          $.ajax({
+            dataType:'json',
+            type: 'POST',
+            url:'<?=BASE_URL?>Turma/adicionar_instrutor_ser',
+            data: $('#formAddInstrutor').serialize(),
+            success: function(data){
+              
+               if(data[0] == true){
 
-    });
+                   // $('#formAddInstrutor').trigger("reset");
+
+                    swal("OK!","Instrutor(s) adicionado(s) com sucesso!", "success" ,{ timer: 3000, button: false});
+                    //Depois de 3,5 segundos, o usuário será redirecionado
+                    setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar/?turma=' + data[1] ; }, 3100);
+                }else{
+                    swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
+                }
+
+            }, beforeSend: function() {
+                            swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+            },error: function() {
+              alert('Unexpected error.');
+            }
+          });
+          return false;
+        });//submit
+
+
+                   //Adiciona instrutor externo
+        $('#formAddExterno').submit(function(event){
+          $.ajax({
+            dataType:'json',
+            type: 'POST',
+            url:'<?=BASE_URL?>Turma/adicionar_instrutor_ext',
+            data: $('#formAddExterno').serialize(),
+            success: function(data){
+               
+               if(data[0] == true){
+
+                    swal("OK!","Instrutor(s) adicionado(s) com sucesso!", "success" ,{ timer: 3000, button: false});
+                    //Depois de 3,5 segundos, o usuário será redirecionado
+                    setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar/?turma=' + data[1] ; }, 3100);
+                }else{
+                    swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
+                }
+
+            }, beforeSend: function() {
+                            swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+            },error: function() {
+              alert('Unexpected error.');
+            }
+          });
+          return false;
+        });//submit
+
+    });//document
 
     //    O bloco de comando abaixo irá exibir ou não o campo de matrícula, de acordo com o que for selecionado pelo usuário
-
     $("input[type=radio]").on("change", function() {
 
         var opcao = $(this).val();
@@ -296,6 +429,7 @@
     });
 
 
+    //Carrega as informações da turma nos campos
     function carregar_dados(codigo){
      
         $.ajax({
@@ -358,10 +492,147 @@
         });
        }//carregar dados
 
-       function adicionar_instrutor(turma){
-
-        $('#modalInstrutor').modal('show');
+       //Abre o modal adicionar_instrutor
+       function adicionar_servidor(turma){
         
+        $('#modalServidor').modal('show');
+        table_servidores();
+        $('#inputModalTurma').val(turma);
+       
        }
+
+       //Abre o modal adicionar_instrutor
+       function adicionar_externo(turma){
+  
+        $('#modalExterno').modal('show');
+        table_externo();
+        $('#inputModalTurmaExt').val(turma);
+       
+       }
+
+       //Lista os instrutores servidores para inserção
+       function table_servidores(){
+          $.ajax({
+            type: 'POST',
+            dataType:'json',
+            url:'<?=BASE_URL?>Usuario/listar_usuarios',
+            data: {'categoria' : 'S', 'tipo' : 'I'},
+            success: function(data){
+              swal.close();
+              //Limpa a tabela, caso o modal já tenha sido aberto antes
+               $('#table_servidor tr').remove();
+
+              for(var i = 0; data.length > 0; i++){
+                $('#table_servidor').append('<tr><td>' + data[i].nome + '</td><td>' 
+                                                                 + '<input type="checkbox" class="form-check-input" name="instrutor[]" value="' + data[i].cpf +'"> '
+                                                                 + '</td></tr>');
+              }
+
+            }, beforeSend: function() {
+                                swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+            },error: function() {
+                alert('Unexpected error.');
+            }
+          });
+        }//table_servidores()
+
+        //Lista os instrutores externos para inserção
+        function table_externo(){
+            $.ajax({
+                dataType: 'json',
+                url:'<?=BASE_URL?>Adm/listar_instrutor_ext',
+                success: function(data){
+                    swal.close();
+                    //Limpa a tabela, caso o modal já tenha sido aberto antes
+                     $('#table_externo tr').remove();
+
+                    for(var i=0; data.length > 0; i++){
+                        $('#table_externo').append('<tr><td>' + data[i].nome + '</td><td>' 
+                                                                 + '<input type="checkbox" class="form-check-input" name="instrutor[]" value="' + data[i].cpf +'"> '
+                                                                 + '</td></tr>');
+                    }
+                },beforeSend: function (){
+                    swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
+                },error: function(){
+                    alert('Unexpected error.');
+                }
+            });
+        }//table_externo()
+
+        //Lista os instrutores servidores cadastrados na turma
+        function tabela_servidor(turma){
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '<?=BASE_URL?>Turma/carrega_instrutor_ser',
+                data: {'cod_turma' : turma},
+                success: function(data){
+
+                    for(var i=0; data.length > 0; i++){
+                         $('#tabela_servidor').append('<tr><td>' + data[i].nome_servidor + '</td><td>' 
+                                                                 + '<button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt" onclick="excluir_instrutor('+ turma + ')"></i></button> '
+                                                                 + '</td></tr>');
+                    }
+                },beforeSend: function (){
+                    swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
+                },error: function(){
+                    alert('Unexpected error.');
+                }
+            });
+        }//tabela_servidor
+//"'+  data[i].cpf_servidor +'",' + turma +'
+    function excluir_instrutor(turma) {
+        alert('Olá');
+        // swal("Atenção", "Gostaria de excluir esse curso?", "warning", {
+        //     buttons: {
+        //         confirm: {
+        //             text: "Sim",
+        //             value: true,
+        //             visible: true,
+        //             className: "btn-confirm"
+                    
+        //         },
+        //         cancel: {
+        //             text: "Não",
+        //             value: false,
+        //             visible: true,
+        //             className: "btn-cancel",
+        //             closeModal: true,
+        //         }
+        //     },
+        //     closeOnClickOutside: false
+        // }).then((value) => {
+        //     //Caso o valor seja verdadeiro, ele ira desativar o usuário
+        //     if (value) {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?=BASE_URL?>Turma/excluir_instrutor',
+        //             data: {
+        //                 'codigo': codigo
+        //             },
+        //             success: function(data) {
+        //                 if (data === '1') {
+        //                     swal("OK!", "Curso  excluido com sucesso!", "success", {timer: 3000,button: false});
+        //                     //Depois de 3,1 segundos, o usuário será redirecionado
+        //                     setTimeout(function() {
+        //                         window.location.href = '<?=BASE_URL?>Adm/pagina/cp_cursos';
+        //                     }, 3100);
+
+        //                 } else {
+        //                     swal("Atenção!", "Erro ao excluir cadastro. Entre em contato com suporte.", "error", {timer: 3000,button: false});
+        //                 }
+        //             },
+        //             beforeSend: function() {
+        //                 swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+        //             },
+        //             error: function() {
+        //                 alert('Unexpected error.');
+        //             }
+
+        //         }); //Ajax
+        //     }
+        // }); //swal
+
+    } //excluir_instrutor()
 
 </script>

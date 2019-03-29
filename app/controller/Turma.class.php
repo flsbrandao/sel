@@ -22,10 +22,45 @@ Class Turma extends Controller{
 		 	$objTurma->adicionar_dias($codigo,$v, $horario);
 		}
 
-		$_SESSION['turma'] = $codigo;
+		//O array retorna o valor true, e o codigo (PK) da turma inserida
+		$array = array(true, $codigo);
 
-		echo true;
+		echo json_encode($array);
 	}//adicionar_turma()
+
+	public function adicionar_instrutor_ser(){
+		$cod_turma = $_POST['inputModalTurma'];
+		$instrutores = $_POST['instrutor'];
+
+		$objTurma = new M_Turma(Conexao::getInstance());
+
+		foreach ($instrutores as $key => $value) {
+			
+			$objTurma->adicionar_instrutor_ser($cod_turma,$value);
+		}
+
+		$array = array(true, $cod_turma);
+
+		echo json_encode($array);
+
+	}//adicionar_instrutor()
+
+	public function adicionar_instrutor_ext(){
+		$cod_turma = $_POST['inputModalTurmaExt'];
+		$instrutores = $_POST['instrutor'];
+
+		$objTurma = new M_Turma(Conexao::getInstance());
+
+		foreach ($instrutores as $key => $value) {
+			
+			$objTurma->adicionar_instrutor_ext($cod_turma,$value);
+		}
+
+		$array = array(true, $cod_turma);
+
+		echo json_encode($array);
+
+	}//adicionar_instrutor()
 
 	public function listar_dias(){
 
@@ -42,4 +77,13 @@ Class Turma extends Controller{
 
 		echo json_encode($retorno);
 	}//carregar_turma()
+
+	//Carrega os instrutores já cadastrados no curso
+	public function carrega_instrutor_ser(){
+		$cod_turma = $_POST['cod_turma'];
+		$objTurma = new M_Turma(Conexao::getInstance());
+		$retorno = $objTurma->carrega_instrutor_ser($cod_turma);
+
+		echo json_encode($retorno);
+	}//carrega_instrutor_ser()
 }//Class

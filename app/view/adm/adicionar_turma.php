@@ -160,18 +160,20 @@
         //Envia os dados informados para a Controller
         $("#formAdicionar").submit(function(event){
             $.ajax({
+                dataType: 'json',
                 type: "POST",
                 url: "<?=BASE_URL?>Turma/adicionar_turma",
                 data: $("#formAdicionar").serialize(),
                 success: function(data){
-
-                    if($.trim(data) == true){
+                    
+                    if(data[0] == true){
 
                         $('#formAdicionar').trigger("reset");
 
                         swal("OK!","Turma adicionada com sucesso!", "success" ,{ timer: 3000, button: false});
                         //Depois de 3,5 segundos, o usuário será redirecionado
-                         setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar'; }, 3100); 
+                        setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar/?turma=' + data[1] ; }, 3100);
+
                     }else{
                         swal( "Atenção!", "Erro ao realizar cadastro. Entre em contato com suporte.", "error", { timer: 3000, button: false});
                     }
@@ -193,7 +195,7 @@
             dataType: 'json',
             url: '<?=BASE_URL?>Curso/listar_allcursos',
             success: function(data){
-
+                swal.close();
                 for (var i = 0; data.length > i; i++){
                     $('#slc_cursos').append('<option value="' + data[i].codigo + '">' + data[i].nome + '</option>');
                 }
