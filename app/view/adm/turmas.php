@@ -62,6 +62,6 @@
 
     $(document).ready(function() {
 
-        $('#turma').load("<?=BASE_URL?>Adm/table/turma_aberta");
+        $('#turmas').load("<?=BASE_URL?>Adm/table/turma_aberta");
     });
 </script>

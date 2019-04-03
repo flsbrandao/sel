@@ -137,4 +137,22 @@ Class M_Turma extends Model {
 		}
 	}//carrega_instrutor_ser();
 
+	public function listar_turmas($situacao){
+		try{
+			$sql = "SELECT tb_turma.codigo, tb_curso.nome, inicio, fim FROM tb_turma INNER JOIN tb_curso ON (tb_curso.codigo = tb_turma.cod_curso) WHERE sit_turma = ? AND tb_turma.situacao = 'A'";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $situacao);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return $dados;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//listar_turmas()
+
 }//Class

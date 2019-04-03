@@ -86,4 +86,12 @@ Class Turma extends Controller{
 
 		echo json_encode($retorno);
 	}//carrega_instrutor_ser()
+
+	public function listar_turmas(){
+		$situacao = $_POST['situacao'];
+		$objTurma = new M_Turma(Conexao::getInstance());
+		$retorno = $objTurma->listar_turmas($situacao);
+
+		echo json_encode($retorno);
+	}//listar_turmas()
 }//Class
