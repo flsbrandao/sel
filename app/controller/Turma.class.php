@@ -94,4 +94,13 @@ Class Turma extends Controller{
 
 		echo json_encode($retorno);
 	}//listar_turmas()
+
+	public function desativar_turma(){
+		$cod_turma = $_POST['codigo'];
+		$objTurma = new M_Turma(Conexao::getInstance());
+		$retorno = $objTurma->desativar_turma($cod_turma);
+
+		echo $retorno;
+
+	}//desativar_turma()
 }//Class

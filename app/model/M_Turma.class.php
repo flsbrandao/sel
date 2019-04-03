@@ -155,4 +155,20 @@ Class M_Turma extends Model {
 		}
 	}//listar_turmas()
 
+	public function desativar_turma($codigo){
+		try{
+			$sql = "UPDATE tb_turma SET situacao = 'D' WHERE codigo = ? ";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $codigo);
+			$stm->execute();
+
+			return true;
+			
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//desativar_turma()
+
 }//Class
