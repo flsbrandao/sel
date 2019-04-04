@@ -111,4 +111,8 @@ function desativa_turma(cod_turma){
         }); //swal
 
 }//desativa_turma
+
+function busca_turma(cod_turma){
+    swal("Atenção!", "Módulo em desenvolvimento", "warning");
+}
 </script>

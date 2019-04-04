@@ -15,8 +15,9 @@ Class Turma extends Controller{
 		$objTurma = new M_Turma(Conexao::getInstance());
 		$retorno = $objTurma->adicionar_turma($curso,$inicio,$fim,$quantidade,$limitar,$categoria);
 		
-		$codigo = count($retorno);
+		$codigo = $retorno[0];
 
+		
 		//Insere os dias de curso
 		foreach ($dias as $valores => $v) {
 		 	$objTurma->adicionar_dias($codigo,$v, $horario);
@@ -26,6 +27,7 @@ Class Turma extends Controller{
 		$array = array(true, $codigo);
 
 		echo json_encode($array);
+
 	}//adicionar_turma()
 
 	public function adicionar_instrutor_ser(){

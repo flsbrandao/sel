@@ -16,10 +16,10 @@ Class M_Turma extends Model {
 			$stm->execute();
 
 			//A query abaixo irá pegar os últimos ID auto_incremet inseridos na tabela tb_curso
-			$query = "SELECT LAST_INSERT_ID(codigo) FROM tb_turma";
+			$query = "SELECT LAST_INSERT_ID(codigo) FROM tb_turma ORDER BY codigo DESC";
 			$stmt = $this->pdo->prepare($query);
 			$stmt->execute();
-			$dados = $stmt->fetchAll(PDO::FETCH_OBJ);
+			$dados = $stmt->fetch();
 
 			return $dados;
 
@@ -163,7 +163,7 @@ Class M_Turma extends Model {
 			$stm->execute();
 
 			return true;
-			
+
 		}catch(PDOEXception $e){
 
 			echo 'ERRO: ' . $e->getMessage();
