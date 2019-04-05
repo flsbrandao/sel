@@ -24,7 +24,7 @@
         <div class="col-sm-12 col-md-10 col-lg-8">
 
 
-            <form id="formAdicionar">
+            <form id="formEditar">
 
                 <div class="form-row">
                     
@@ -251,7 +251,8 @@
                     <div class="table-responsive col-lg-12">
 
                         <form id="formAddInstrutor">
-                            <input type="hidden" name="inputModalTurma" id="inputModalTurma">
+                            <input type="hidden" name="codTurma" id="inputModalTurma">
+                            <input type="hidden" name="tipo_instrutor" value="S">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -310,7 +311,8 @@
                     <div class="table-responsive col-lg-12">
 
                         <form id="formAddExterno">
-                            <input type="hidden" name="inputModalTurmaExt" id="inputModalTurmaExt">
+                            <input type="hidden" name="codTurma" id="inputModalTurmaExt">
+                            <input type="hidden" name="tipo_instrutor" value="E">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -359,7 +361,7 @@
           $.ajax({
             dataType:'json',
             type: 'POST',
-            url:'<?=BASE_URL?>Turma/adicionar_instrutor_ser',
+            url:'<?=BASE_URL?>Turma/adicionar_instrutor',
             data: $('#formAddInstrutor').serialize(),
             success: function(data){
               
@@ -389,7 +391,7 @@
           $.ajax({
             dataType:'json',
             type: 'POST',
-            url:'<?=BASE_URL?>Turma/adicionar_instrutor_ext',
+            url:'<?=BASE_URL?>Turma/adicionar_instrutor',
             data: $('#formAddExterno').serialize(),
             success: function(data){
                
@@ -409,9 +411,31 @@
             }
           });
           return false;
-        });//submit
+        });//submit adiconar servidor externo
 
-    });//document
+
+        $('#formEditar').submit(function(event){
+            $.ajax({
+                type: 'POST',
+                url: '<?=BASE_URL?>Turma/editar_turma',
+                data: $('#formEditar').serialize(),
+                success: function(data){
+                    if($.trim(data) === '1'){
+
+                        swal("OK!","Turma editada com sucesso!", "success" ,{ timer: 3000, button: false});
+                        //Depois de 3,5 segundos, o usuário será redirecionado
+                        setTimeout(function(){ window.location.href = '<?=BASE_URL?>Adm/pagina/turmas'; }, 3100);
+                    }
+                },beforeSend: function() {
+                            swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+                },error: function() {
+                  alert('Unexpected error.');
+                }
+            });
+            return false;
+        });//submit editar turma
+
+    });// ################  document ########################################
 
     //    O bloco de comando abaixo irá exibir ou não o campo de matrícula, de acordo com o que for selecionado pelo usuário
     $("input[type=radio]").on("change", function() {
@@ -604,6 +628,7 @@
             });
         }//tabela_externo
 
+    //Exclui servidor
     function excluir_instrutor(turma, cpf, instrutor) {
      
         swal("Atenção", "Gostaria de excluir esse instrutor da turma?", "warning", {

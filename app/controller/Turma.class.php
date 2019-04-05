@@ -17,7 +17,6 @@ Class Turma extends Controller{
 		
 		$codigo = $retorno[0];
 
-		
 		//Insere os dias de curso
 		foreach ($dias as $valores => $v) {
 		 	$objTurma->adicionar_dias($codigo,$v, $horario);
@@ -30,39 +29,55 @@ Class Turma extends Controller{
 
 	}//adicionar_turma()
 
-	public function adicionar_instrutor_ser(){
-		$cod_turma = $_POST['inputModalTurma'];
+	public function editar_turma(){
+
+		$cod_turma = $_POST['inputCodTurma'];
+		$inicio = $_POST['inputInicio'];
+		$fim = $_POST['inputFim'];
+		$horario = $_POST['inputHorario'];
+		$quantidade = $_POST['inputQuantidade'];
+		$limitar = $_POST['inputLimitacao'];
+		$categoria = $_POST['radio_curso'];
+		$dias = $_POST['dias'];
+
+		 $objTurma = new M_Turma(Conexao::getInstance());
+
+		// $retorno = $objTurma->editar_turma($cod_turma,$inicio,$fim,$quantidade,$limitar,$categoria);
+
+		foreach ($dias as $valores => $v) {
+			$retorno = $objTurma->editar_dias($cod_turma,$v, $horario);
+		}
+
+		echo $retorno;
+
+	}//editar_turma()
+
+	public function adicionar_instrutor(){
+
+		$cod_turma = $_POST['codTurma'];
 		$instrutores = $_POST['instrutor'];
+		$tipo_instrutor = $_POST['tipo_instrutor'];
 
 		$objTurma = new M_Turma(Conexao::getInstance());
 
-		foreach ($instrutores as $key => $value) {
-			
-			$objTurma->adicionar_instrutor_ser($cod_turma,$value);
+		if($tipo_instrutor === 'S'){
+			//Caso o instrutor for servidor
+			foreach ($instrutores as $key => $value) {
+				$objTurma->adicionar_instrutor_ser($cod_turma,$value);
+			}
+
+		}else if($tipo_instrutor === 'E'){
+			//Caso o instrutor for externo
+			foreach ($instrutores as $key => $value) {
+				$objTurma->adicionar_instrutor_ext($cod_turma,$value);
+			}
 		}
 
 		$array = array(true, $cod_turma);
 
 		echo json_encode($array);
 
-	}//adicionar_instrutor()
-
-	public function adicionar_instrutor_ext(){
-		$cod_turma = $_POST['inputModalTurmaExt'];
-		$instrutores = $_POST['instrutor'];
-
-		$objTurma = new M_Turma(Conexao::getInstance());
-
-		foreach ($instrutores as $key => $value) {
-			
-			$objTurma->adicionar_instrutor_ext($cod_turma,$value);
-		}
-
-		$array = array(true, $cod_turma);
-
-		echo json_encode($array);
-
-	}//adicionar_instrutor()
+	}//Adiconar_instrutor()
 
 	public function listar_dias(){
 

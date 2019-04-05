@@ -30,6 +30,28 @@ Class M_Turma extends Model {
 		}
 	}//adicionar_curso()
 
+	public function editar_turma($cod_turma,$inicio,$fim,$quantidade,$limite,$categoria){
+		try{
+			$sql = "UPDATE tb_turma SET inicio = ?, fim = ? , quant_aulas = ?, limite_inscritos = ?, categoria = ? WHERE codigo = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $inicio);
+			$stm->bindValue(2, $fim);
+			$stm->bindValue(3, $quantidade);
+			$stm->bindValue(4, $limite);
+			$stm->bindValue(5, $categoria);
+			$stm->bindValue(6, $cod_turma);
+
+			$stm->execute();
+
+			return true;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//editar_turma()
+
 	public function adicionar_dias($codigo, $dia, $horario){
 
 		try{
@@ -47,7 +69,24 @@ Class M_Turma extends Model {
 			echo 'ERRO: ' . $e->getMessage();
 			return false;
 		}
-	}//adicionar_dias();
+	}//adicionar_dias()
+
+	public function editar_dias($codigo, $dia, $horario){
+		try{
+			$sql = "UPDATE tb_dias SET dias = ?, horario = ? WHERE codigo_turma = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $dia);
+			$stm->bindValue(2, $horario);
+			$stm->bindValue(3, $codigo);
+			$stm->execute();
+
+			return true;
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//editar_dias()
 
 	public function listar_dias($codigo){
 		try{
