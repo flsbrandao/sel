@@ -80,14 +80,20 @@ Class Turma extends Controller{
 		echo json_encode($retorno);
 	}//carregar_turma()
 
-	//Carrega os instrutores já cadastrados no curso
-	public function carrega_instrutor_ser(){
+	//carrega os intrutores inscritos no curso
+	public function carregar_instrutor(){
 		$cod_turma = $_POST['cod_turma'];
-		$objTurma = new M_Turma(Conexao::getInstance());
-		$retorno = $objTurma->carrega_instrutor_ser($cod_turma);
+		$instrutor = $_POST['instrutor'];
 
-		echo json_encode($retorno);
-	}//carrega_instrutor_ser()
+		$objTurma = new M_Turma(Conexao::getInstance());
+
+		if($instrutor === 'S'){
+			$retorno = $objTurma->carrega_instrutor_ser($cod_turma);
+		}else if($instrutor === 'E'){
+			$retorno = $objTurma->carrega_instrutor_ext($cod_turma);
+		}
+		echo json_encode($retorno);	
+	}//carregar_instrutor
 
 	public function listar_turmas(){
 		$situacao = $_POST['situacao'];
@@ -105,4 +111,20 @@ Class Turma extends Controller{
 		echo $retorno;
 
 	}//desativar_turma()
+
+	public function excluir_instrutor(){
+		$cod_turma = $_POST['cod_turma'];
+		$cpf = $_POST['cpf'];
+		$instrutor = $_POST['instrutor'];
+
+		$objTurma = new M_Turma(Conexao::getInstance());
+
+		if($instrutor === 'S'){
+			$retorno = $objTurma->deletar_instrutor_ser($cod_turma, $cpf);
+		}else if($instrutor === 'E'){
+			$retorno = $objTurma->deletar_instrutor_ext($cod_turma, $cpf);
+		}
+
+		echo $retorno;
+	}// excluir_instrutor()
 }//Class

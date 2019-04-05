@@ -137,9 +137,27 @@ Class M_Turma extends Model {
 		}
 	}//carrega_instrutor_ser();
 
+	public function carrega_instrutor_ext($cod_turma){
+		try{
+			$sql = "SELECT nome,  cpf_externo FROM tb_lecionar INNER JOIN tb_instrutor_ext ON (tb_instrutor_ext.cpf = tb_lecionar.cpf_externo) WHERE cod_turma = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1,$cod_turma);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return $dados;
+
+		}catch(PDOEXception $e){
+
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//carrega_instrutor_ext();
+
 	public function listar_turmas($situacao){
 		try{
-			$sql = "SELECT tb_turma.codigo, tb_curso.nome, inicio, fim FROM tb_turma INNER JOIN tb_curso ON (tb_curso.codigo = tb_turma.cod_curso) WHERE sit_turma = ? AND tb_turma.situacao = 'A'";
+			$sql = "SELECT tb_turma.codigo, tb_curso.nome, inicio, fim FROM tb_turma INNER JOIN tb_curso ON (tb_curso.codigo = tb_turma.cod_curso) WHERE sit_turma = ? AND tb_turma.situacao = 'A' ORDER BY tb_turma.codigo DESC";
 			$stm = $this->pdo->prepare($sql);
 			$stm->bindValue(1, $situacao);
 			$stm->execute();
@@ -170,5 +188,38 @@ Class M_Turma extends Model {
 			return false;
 		}
 	}//desativar_turma()
+
+	public function deletar_instrutor_ser($codigo, $cpf){
+		try{
+			$sql = "DELETE FROM tb_lecionar WHERE cod_turma = ? AND cpf_servidor = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $codigo);
+			$stm->bindValue(2, $cpf);
+			$stm->execute();
+
+			return true;
+
+		}catch(PDOEXception $e){
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//deletar_instrutor_ser()
+
+
+	public function deletar_instrutor_ext($codigo, $cpf){
+		try{
+			$sql = "DELETE FROM tb_lecionar WHERE cod_turma = ? AND cpf_externo = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $codigo);
+			$stm->bindValue(2, $cpf);
+			$stm->execute();
+
+			return true;
+			
+		}catch(PDOEXception $e){
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//deletar_instrutor_ext()
 
 }//Class

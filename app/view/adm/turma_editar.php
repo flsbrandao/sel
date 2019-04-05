@@ -352,6 +352,7 @@
         var codigo = <?php echo $_GET['turma']?>;
         carregar_dados(codigo);
         tabela_servidor(codigo);
+        tabela_externo(codigo);
 
                 //Adiciona instrutor
         $('#formAddInstrutor').submit(function(event){
@@ -521,7 +522,7 @@
               swal.close();
               //Limpa a tabela, caso o modal já tenha sido aberto antes
                $('#table_servidor tr').remove();
-
+               swal.close();
               for(var i = 0; data.length > 0; i++){
                 $('#table_servidor').append('<tr><td>' + data[i].nome + '</td><td>' 
                                                                  + '<input type="checkbox" class="form-check-input" name="instrutor[]" value="' + data[i].cpf +'"> '
@@ -545,7 +546,7 @@
                     swal.close();
                     //Limpa a tabela, caso o modal já tenha sido aberto antes
                      $('#table_externo tr').remove();
-
+                     swal.close();
                     for(var i=0; data.length > 0; i++){
                         $('#table_externo').append('<tr><td>' + data[i].nome + '</td><td>' 
                                                                  + '<input type="checkbox" class="form-check-input" name="instrutor[]" value="' + data[i].cpf +'"> '
@@ -564,13 +565,13 @@
             $.ajax({
                 dataType: 'json',
                 type: 'POST',
-                url: '<?=BASE_URL?>Turma/carrega_instrutor_ser',
-                data: {'cod_turma' : turma},
+                url: '<?=BASE_URL?>Turma/carregar_instrutor',
+                data: {'cod_turma' : turma, 'instrutor' : 'S'},
                 success: function(data){
-
+                    swal.close();
                     for(var i=0; data.length > 0; i++){
                          $('#tabela_servidor').append('<tr><td>' + data[i].nome_servidor + '</td><td>' 
-                                                                 + '<button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt" onclick="excluir_instrutor('+ turma + ')"></i></button> '
+                                                                 + '<button type="submit" class="btn btn-danger btn-sm"  onclick=excluir_instrutor('+ turma + ',"' + data[i].cpf_servidor +'","S")><i class="far fa-trash-alt"></i></button> '
                                                                  + '</td></tr>');
                     }
                 },beforeSend: function (){
@@ -580,58 +581,80 @@
                 }
             });
         }//tabela_servidor
-//"'+  data[i].cpf_servidor +'",' + turma +'
-    function excluir_instrutor(turma) {
-        alert('Olá');
-        // swal("Atenção", "Gostaria de excluir esse curso?", "warning", {
-        //     buttons: {
-        //         confirm: {
-        //             text: "Sim",
-        //             value: true,
-        //             visible: true,
-        //             className: "btn-confirm"
+
+         //Lista os instrutores servidores cadastrados na turma
+        function tabela_externo(turma){
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '<?=BASE_URL?>Turma/carregar_instrutor',
+                data: {'cod_turma' : turma, 'instrutor':'E'},
+                success: function(data){
+                    swal.close();
+                    for(var i=0; data.length > 0; i++){
+                         $('#tabela_externo').append('<tr><td>' + data[i].nome + '</td><td>' 
+                                                                 + '<button type="submit" class="btn btn-danger btn-sm"  onclick=excluir_instrutor('+ turma + ',"' + data[i].cpf_externo +'","E")><i class="far fa-trash-alt"></i></button> '
+                                                                 + '</td></tr>');
+                    }
+                },beforeSend: function (){
+                    swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
+                },error: function(){
+                    alert('Unexpected error.');
+                }
+            });
+        }//tabela_externo
+
+    function excluir_instrutor(turma, cpf, instrutor) {
+     
+        swal("Atenção", "Gostaria de excluir esse instrutor da turma?", "warning", {
+            buttons: {
+                confirm: {
+                    text: "Sim",
+                    value: true,
+                    visible: true,
+                    className: "btn-confirm"
                     
-        //         },
-        //         cancel: {
-        //             text: "Não",
-        //             value: false,
-        //             visible: true,
-        //             className: "btn-cancel",
-        //             closeModal: true,
-        //         }
-        //     },
-        //     closeOnClickOutside: false
-        // }).then((value) => {
-        //     //Caso o valor seja verdadeiro, ele ira desativar o usuário
-        //     if (value) {
-        //         $.ajax({
-        //             type: 'POST',
-        //             url: '<?=BASE_URL?>Turma/excluir_instrutor',
-        //             data: {
-        //                 'codigo': codigo
-        //             },
-        //             success: function(data) {
-        //                 if (data === '1') {
-        //                     swal("OK!", "Curso  excluido com sucesso!", "success", {timer: 3000,button: false});
-        //                     //Depois de 3,1 segundos, o usuário será redirecionado
-        //                     setTimeout(function() {
-        //                         window.location.href = '<?=BASE_URL?>Adm/pagina/cp_cursos';
-        //                     }, 3100);
+                },
+                cancel: {
+                    text: "Não",
+                    value: false,
+                    visible: true,
+                    className: "btn-cancel",
+                    closeModal: true,
+                }
+            },
+            closeOnClickOutside: false
+        }).then((value) => {
+            //Caso o valor seja verdadeiro, ele ira desativar o usuário
+            if (value) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?=BASE_URL?>Turma/excluir_instrutor',
+                    data: {
+                        'cpf': cpf,  'cod_turma' : turma, 'instrutor' : instrutor
+                    },
+                    success: function(data) {
+                        if (data === '1') {
+                            swal("OK!", "Instrutor excluido com sucesso!", "success", {timer: 3000,button: false});
+                            //Depois de 3,1 segundos, o usuário será redirecionado
+                            setTimeout(function() {
+                                window.location.href = '<?=BASE_URL?>Adm/pagina/turma_editar/?turma=' + turma;
+                            }, 3100);
 
-        //                 } else {
-        //                     swal("Atenção!", "Erro ao excluir cadastro. Entre em contato com suporte.", "error", {timer: 3000,button: false});
-        //                 }
-        //             },
-        //             beforeSend: function() {
-        //                 swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
-        //             },
-        //             error: function() {
-        //                 alert('Unexpected error.');
-        //             }
+                        } else {
+                            swal("Atenção!", "Erro ao excluir cadastro. Entre em contato com suporte.", "error", {timer: 3000,button: false});
+                        }
+                    },
+                    beforeSend: function() {
+                        swal({title: "Aguarde!",text: "Carregando...",icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif",button: false});
+                    },
+                    error: function() {
+                        alert('Unexpected error.');
+                    }
 
-        //         }); //Ajax
-        //     }
-        // }); //swal
+                }); //Ajax
+            }
+        }); //swal
 
     } //excluir_instrutor()
 
