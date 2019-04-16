@@ -42,10 +42,12 @@ Class Turma extends Controller{
 
 		 $objTurma = new M_Turma(Conexao::getInstance());
 
-		// $retorno = $objTurma->editar_turma($cod_turma,$inicio,$fim,$quantidade,$limitar,$categoria);
+		$retorno = $objTurma->editar_turma($cod_turma,$inicio,$fim,$quantidade,$limitar,$categoria);
 
+		$objTurma->deletar_dias($cod_turma);
+		
 		foreach ($dias as $valores => $v) {
-			$retorno = $objTurma->editar_dias($cod_turma,$v, $horario);
+			$retorno = $objTurma->adicionar_dias($cod_turma,$v, $horario);
 		}
 
 		echo $retorno;

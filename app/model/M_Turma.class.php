@@ -71,13 +71,11 @@ Class M_Turma extends Model {
 		}
 	}//adicionar_dias()
 
-	public function editar_dias($codigo, $dia, $horario){
+	public function deletar_dias($codigo){
 		try{
-			$sql = "UPDATE tb_dias SET dias = ?, horario = ? WHERE codigo_turma = ?";
+			$sql = "DELETE FROM tb_dias WHERE codigo_turma = ?";
 			$stm = $this->pdo->prepare($sql);
-			$stm->bindValue(1, $dia);
-			$stm->bindValue(2, $horario);
-			$stm->bindValue(3, $codigo);
+			$stm->bindValue(1, $codigo);
 			$stm->execute();
 
 			return true;

@@ -84,7 +84,7 @@
 
                     } else if ($.trim(data) === 'E') {
 
-                        window.location.href = '<?=BASE_URL?>Estudante/pagina/cp_aberto';
+                        window.location.href = '<?=BASE_URL?>Estudante/pagina/cursos';
 
                     } else {
 

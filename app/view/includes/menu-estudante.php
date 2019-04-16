@@ -13,7 +13,7 @@
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDropCursos">Curso Presencial</a>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?=BASE_URL?>Estudante/pagina/cp_aberto">Abertos</a>
+                        <a class="dropdown-item" href="<?=BASE_URL?>Estudante/pagina/cursos">Abertos</a>
                         <a class="dropdown-item" href="<?=BASE_URL?>Estudante/pagina/cp_meuscursos">Meus cursos</a>
                     </div>
 
