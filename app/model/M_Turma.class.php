@@ -259,4 +259,21 @@ Class M_Turma extends Model {
 		}
 	}//deletar_instrutor_ext()
 
+	public function listar_turmas_curso($codigo_curso){
+		try{
+			$sql = "SELECT * FROM tb_turma WHERE cod_curso = ? AND sit_turma = 'AB'";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $codigo_curso);
+			$stm->execute();
+
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+			return $dados;
+
+		}catch(PDOEXception $e){
+			echo 'ERRO: ' . $e->getMessage();
+			return false;
+		}
+	}//listar_turmas_curso($codigo_curso)
+
 }//Class

@@ -90,6 +90,7 @@ Class Turma extends Controller{
 	}//listar_dias()
 
 	public function carregar_turma(){
+		
 		$codigo = $_POST['codigo'];
 		$objTurma = new M_Turma(Conexao::getInstance());
 		$retorno = $objTurma->carregar_turma($codigo);
@@ -97,8 +98,9 @@ Class Turma extends Controller{
 		echo json_encode($retorno);
 	}//carregar_turma()
 
-	//carrega os intrutores inscritos no curso
+	//carrega os instrutores inscritos no curso
 	public function carregar_instrutor(){
+
 		$cod_turma = $_POST['cod_turma'];
 		$instrutor = $_POST['instrutor'];
 
@@ -113,6 +115,7 @@ Class Turma extends Controller{
 	}//carregar_instrutor
 
 	public function listar_turmas(){
+
 		$situacao = $_POST['situacao'];
 		$objTurma = new M_Turma(Conexao::getInstance());
 		$retorno = $objTurma->listar_turmas($situacao);
@@ -121,6 +124,7 @@ Class Turma extends Controller{
 	}//listar_turmas()
 
 	public function desativar_turma(){
+
 		$cod_turma = $_POST['codigo'];
 		$objTurma = new M_Turma(Conexao::getInstance());
 		$retorno = $objTurma->desativar_turma($cod_turma);
@@ -130,6 +134,7 @@ Class Turma extends Controller{
 	}//desativar_turma()
 
 	public function excluir_instrutor(){
+
 		$cod_turma = $_POST['cod_turma'];
 		$cpf = $_POST['cpf'];
 		$instrutor = $_POST['instrutor'];
@@ -144,4 +149,15 @@ Class Turma extends Controller{
 
 		echo $retorno;
 	}// excluir_instrutor()
+
+	public function listar_turmas_curso(){
+
+		$codigo_curso = $_POST['codigo'];
+		$objTurma = new M_Turma(Conexao::getInstance());
+		$retorno = $objTurma->listar_turmas_curso($codigo_curso);
+
+		echo json_encode($retorno);
+
+	}//listar_turmas_curso()
+
 }//Class

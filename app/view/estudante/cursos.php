@@ -46,7 +46,7 @@ $(document).ready(function() {
                                           '<li class="list-group-item">Total de Horas: ' + data[i].total_horas + '</li>' +       
                                         '</ul>'+
                                         '<div class="card-body">'+
-                                          '<button type="button" href="#" class="btn btn-success">Inscrever-se</button>'+
+                                          '<button type="button" class="btn btn-success" onclick="inscrever_curso(' + data[i].codigo + ')">Inscrever-se</button>'+
                                         '</div>'+       
                                       '</div></div>');
             }
@@ -62,4 +62,8 @@ $(document).ready(function() {
     });
 
   }//carrega_cursos
+
+  function inscrever_curso(codigo_curso){
+    window.location.href = '<?=BASE_URL?>Estudante/pagina/inscrever_curso/?curso=' + codigo_curso;
+  }
 </script>
