@@ -158,7 +158,7 @@
         </div>
     </div>
 
-</div> <!-- modalDescricao -->
+</div> <!-- modalEditar -->
 
 <script>
     $(document).ready(function() {

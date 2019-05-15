@@ -76,7 +76,7 @@
                 success: function(data) {
                     if ($.trim(data) === 'A') {
 
-                        window.location.href = '<?=BASE_URL?>Adm/pagina/cp_aberto';
+                        window.location.href = '<?=BASE_URL?>Adm/pagina/cp_cursos';
 
                     } else if ($.trim(data) === 'I') {
 
