@@ -296,3 +296,41 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var cpf = "<?php echo $_SESSION['cpf']?>";
+    carregar_dados(cpf);
+  });//document.ready
+
+function carregar_dados(cpf){
+
+    $.ajax({
+        type: 'POST',
+        url: '<?=BASE_URL?>Usuario/carregar_usuario',
+        dataType: "json",
+        data: {'cpf': cpf},
+        success: function(data){
+            swal.close();
+           //Carrega os dados nos campos
+            $('#inputNome').val(data[0].nome);
+            $('#inputCpf').val(data[0].cpf);
+            $('#inputRg').val(data[0].rg);
+            $('#inputCelular').val(data[0].celular);
+            $('#inputTelefone').val(data[0].telefone);
+            $('#inputCep').val(data[0].cep);
+            $('#inputNumero').val(data[0].numero);
+            $('#inputLimitacao').val(data[0].complemento);
+            $('#inputEmail').val(data[0].email);
+            $('#inputData').val(data[0].data_nasc);
+
+
+        }, beforeSend: function(){
+            swal({title: "Aguarde!", text: "Carregando...", icon: "<?=BASE_URL?>app/view/assets/img/gif/preloader.gif", button: false});
+        }, error : function(){
+            alert('Unexpected error.');
+        }
+    });
+   }//carregar dados
+
+</script>

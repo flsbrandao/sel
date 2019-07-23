@@ -1,4 +1,4 @@
-<?php 
+<?php
 Class M_Usuario extends Model{
 
 	public function cadastro($cpf,$rg,$nome,$data_nasc,$email,$celular,$telefone,$numero,$complemento,$categoria,$matricula){
@@ -25,9 +25,9 @@ Class M_Usuario extends Model{
 		}catch (PDOException $e){
 
 			echo 'ERRO: ' . $e->getMessage();
-			
+
 			return false;
-		} 
+		}
 	} // cadastro
 
 	public function validar_cpf($cpf){
@@ -165,13 +165,31 @@ Class M_Usuario extends Model{
 			$stm->bindValue(2, $cpf);
 			$stm->execute();
 
-			return true; 
-			
+			return true;
+
 		}catch(PDOException $e){
 
 			 echo 'Erro: ' . $e->getMessage();
 			 return false;
 		}
 	}//alterar_servidor_municipe()
+
+	public function carregar_usuario($cpf)
+	{
+		try
+		{
+			$sql = "SELECT * FROM tb_usuario WHERE cpf = ?";
+			$stm = $this->pdo->prepare($sql);
+			$stm->bindValue(1, $cpf);
+			$stm->execute();
+			$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+			return $dados;
+		}catch(PDOException $e)
+		{
+
+			 echo 'Erro: ' . $e->getMessage();
+			 return false;
+		}
+	}//carregar_usuario()
 
 }//Class

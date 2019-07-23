@@ -1,4 +1,4 @@
-<?php 
+<?php
 Class Usuario extends Controller{
 
 	public function listar_usuarios(){
@@ -39,7 +39,17 @@ Class Usuario extends Controller{
 		}else{
 			$retorno = false;
 		}
-		
+
 		echo $retorno;
-	}
-}
+	}//alterar_servidor()
+
+	public function carregar_usuario()
+	{
+		$cpf = $_POST['cpf'];
+		$objUsuario = new M_Usuario(Conexao::getInstance());
+		$retorno = $objUsuario->carregar_usuario($cpf);
+		
+		echo json_encode($retorno);
+
+	}//Carregar Usuario
+}//Class
